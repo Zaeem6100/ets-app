@@ -1,10 +1,13 @@
 import type {NextPage} from 'next'
+import DashboardLayout from "../../components/DashboardLayout";
 
 
 const Dashboard: NextPage = () => {
   return (
     <>
-      <h1>Hello Next.js</h1>
+      <DashboardLayout>
+        Teacher Here!
+      </DashboardLayout>
     </>
   )
 }

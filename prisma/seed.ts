@@ -11,9 +11,20 @@ async function main() {
       role: 'admin',
       password: bcrypt.hashSync('123456', 8),
     },
-  })
+  });
 
-  console.log({admin})
+  const teacher = await prisma.user.upsert({
+    where: {cnic: '1234567891235'},
+    update: {},
+    create: {
+      cnic: '1234567891235',
+      name: 'Teacher',
+      role: 'teacher',
+      password: bcrypt.hashSync('123456', 8),
+    },
+  });
+
+  console.log({admin, teacher});
 }
 
 main()

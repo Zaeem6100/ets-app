@@ -2,7 +2,7 @@ import type {NextPage} from 'next'
 import AdminLayout from "../../components/AdminLayout";
 
 
-const Dashboard: NextPage = () => {
+const StudentsPage: NextPage = () => {
   return (
     <>
       <AdminLayout>
@@ -12,4 +12,4 @@ const Dashboard: NextPage = () => {
   )
 }
 
-export default Dashboard
+export default StudentsPage

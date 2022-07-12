@@ -5,7 +5,6 @@ import {setToken} from "../../lib/auth";
 import {useRouter} from "next/router";
 import {Transition} from "@headlessui/react";
 import LoaderContext from "../../context/LoaderContext";
-import {Button} from "react-daisyui";
 
 const LoginPage: NextPage = () => {
   const [cnic, setCnic] = useState("");
@@ -108,7 +107,7 @@ const LoginPage: NextPage = () => {
                   className="input input-bordered"/>
               </div>
 
-              <Button type={'submit'}>Login</Button>
+              <button type={'submit'} className='btn btn-primary'>Login</button>
             </div>
           </div>
         </form>
