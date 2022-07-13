@@ -1,11 +1,10 @@
-import {NextPage} from "next";
 import {PropsWithChildren} from "react";
 import {setToken} from "../lib/auth";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import {useRouter} from "next/router";
 
-const DashboardLayout: NextPage = ({children}: PropsWithChildren<any>) => {
+export default function DashboardLayout({children}: PropsWithChildren<any>) {
   const router = useRouter();
 
   return (
@@ -37,5 +36,3 @@ const DashboardLayout: NextPage = ({children}: PropsWithChildren<any>) => {
     );
   }
 }
-
-export default DashboardLayout;

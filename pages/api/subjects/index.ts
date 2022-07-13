@@ -15,7 +15,6 @@ async function getSubjects(req: NextApiRequest, res: NextApiResponse<Data>) {
 
 async function createSubject(req: NextApiRequest, res: NextApiResponse<Data>) {
   const subject = await prisma.subject.create({data: {name: req.body.name,}});
-  console.log(subject);
   return res.status(200).json(subject);
 }
 

@@ -12,11 +12,94 @@ model User {
   name      String
   password  String
   role      String
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
+  Teacher   Teacher[]
+  Student   Student[]
+}
+
+model Teacher {
+  id        String     @id
+  User      User       @relation(fields: [id], references: [cnic])
+  institute String
+  gender    String
+  Question  Question[]
+  createdAt DateTime   @default(now())
+}
+
+model Student {
+  id          String        @id
+  User        User          @relation(fields: [id], references: [cnic])
+  fatherName  String
+  dob         DateTime
+  institute   String
+  gender      String
+  StudentExam StudentExam[]
+  Anomaly     Anomaly[]
+  createdAt   DateTime      @default(now())
+}
+
+model Question {
+  id               Int                @id @default(autoincrement())
+  statement        String             @unique
+  op1              String
+  op2              String
+  op3              String
+  op4              String
+  answer           String
+  difficulty       Int
+  teacherId        String
+  teacher          Teacher            @relation(fields: [teacherId], references: [id])
+  subjectId        Int
+  Subject          Subject            @relation(fields: [subjectId], references: [id])
+  createdAt        DateTime           @default(now())
+  ComputedQuestion ComputedQuestion[]
+}
+
+model Exam {
+  id          Int           @id @default(autoincrement())
+  name        String
+  subjectId   Int
+  Subject     Subject       @relation(fields: [subjectId], references: [id])
+  createdAt   DateTime      @default(now())
+  examStart   DateTime
+  examEnd     DateTime
+  StudentExam StudentExam[]
+  Anomaly     Anomaly[]
+}
+
+model StudentExam {
+  id               Int                @id @default(autoincrement())
+  studentId        String
+  Student          Student            @relation(fields: [studentId], references: [id])
+  examId           Int
+  Exam             Exam               @relation(fields: [examId], references: [id])
+  createdAt        DateTime           @default(now())
+  ComputedQuestion ComputedQuestion[]
+}
+
+model ComputedQuestion {
+  id            Int         @id @default(autoincrement())
+  studentExamId Int
+  StudentExam   StudentExam @relation(fields: [studentExamId], references: [id])
+  questionId    Int
+  Question      Question    @relation(fields: [questionId], references: [id])
+  markedAnswer  String
+  createdAt     DateTime    @default(now())
+}
+
+model Anomaly {
+  cnic          String   @id
+  Student       Student  @relation(fields: [cnic], references: [id])
+  studentexamId Int
+  StudentExam   Exam     @relation(fields: [studentexamId], references: [id])
+  imagePath     String
+  createdAt     DateTime @default(now())
 }
 
 model Subject {
-    id        Int    @id @default(autoincrement())
-    name      String @unique
-    createdAt DateTime @default(now())
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  Question  Question[]
+  Exam      Exam[]
 }
