@@ -1,8 +1,9 @@
 // noinspection TypeScriptUnresolvedVariable,TypeScriptCheckImport
+
 import {PrismaClient} from '@prisma/client'
 
 declare global {
-  // noinspection ES6ConvertVarToLetConst
+  // eslint-disable-next-line no-var
   var prisma: PrismaClient | undefined
 }
 

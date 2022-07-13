@@ -33,7 +33,6 @@ async function login(body: LoginRequest) {
   // User's credentials verified
   // sign and returns the JWT token
   const token = await new SignJWT({
-    user_id: user.id,
     name: user.name,
     cnic: user.cnic,
     role: user.role

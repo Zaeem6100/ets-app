@@ -46,7 +46,6 @@ export default function ValidateRoute({children}: PropsWithChildren) {
       router.events.off('routeChangeStart', () => setAllowed(false));
       router.events.off('routeChangeComplete', verifyRoute);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <> {allowed && children} </>;

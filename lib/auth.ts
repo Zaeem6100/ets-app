@@ -13,7 +13,7 @@ if (localAccessToken) {
   Axios.defaults.headers.common.Authorization = `Bearer ${localAccessToken}`;
 }
 
-export const setToken = (token: string = '') => {
+export const setToken = (token = '') => {
   if (token) {
     localStorage.setItem(TOKEN_KEY, token);
     Axios.defaults.headers.common.Authorization = `Bearer ${token}`;

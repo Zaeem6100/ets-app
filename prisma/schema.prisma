@@ -14,3 +14,9 @@ model User {
   role      String
   createdAt DateTime @default(now())
 }
+
+model Subject {
+    id        Int    @id @default(autoincrement())
+    name      String @unique
+    createdAt DateTime @default(now())
+}

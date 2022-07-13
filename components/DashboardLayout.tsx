@@ -1,11 +1,11 @@
 import {NextPage} from "next";
-import {createRef, useEffect, useState} from "react";
+import {PropsWithChildren} from "react";
 import {setToken} from "../lib/auth";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowRightFromBracket, faHouse} from "@fortawesome/free-solid-svg-icons";
+import {faArrowRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import {useRouter} from "next/router";
 
-const DashboardLayout: NextPage = ({children}) => {
+const DashboardLayout: NextPage = ({children}: PropsWithChildren<any>) => {
   const router = useRouter();
 
   return (

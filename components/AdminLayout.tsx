@@ -1,4 +1,3 @@
-import {NextPage} from "next";
 import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -8,17 +7,17 @@ import {
   faHouse, faMarker,
   faPeopleGroup
 } from "@fortawesome/free-solid-svg-icons";
-import {useRouter} from "next/router";
+import {NextRouter, useRouter} from "next/router";
 import {setToken} from "../lib/auth";
-import {createRef, useEffect, useState} from "react";
+import {createRef, PropsWithChildren, RefObject, useEffect, useState} from "react";
 
-const AdminLayout: NextPage = ({children}) => {
+export default function AdminLayout ({children}: PropsWithChildren<any>): JSX.Element {
   const [headerHeight, setHeaderHeight] = useState(0);
-  const header = createRef();
-  const router = useRouter();
+  const header: RefObject<any> = createRef();
+  const router: NextRouter = useRouter();
 
   useEffect(() => {
-    setHeaderHeight(header?.current?.clientHeight);
+    if (header) setHeaderHeight(header.current?.clientHeight);
   }, [header]);
 
   const items = [
@@ -63,13 +62,13 @@ const AdminLayout: NextPage = ({children}) => {
     </>
   );
 
-  function Drawer({children}): JSX.Element {
+  function Drawer({children}: PropsWithChildren<any>): JSX.Element {
     return (
       <>
-        <div style={{paddingTop: headerHeight}}>
-          <div className="drawer drawer-mobile">
+        <div>
+          <div style={{paddingTop: headerHeight}} className="drawer drawer-mobile">
             <input id="my-drawer" type="checkbox" className="drawer-toggle"/>
-            <div className="drawer-content flex flex-col items-center justify-center">
+            <div className="drawer-content">
               {children}
             </div>
             {
@@ -101,7 +100,7 @@ const AdminLayout: NextPage = ({children}) => {
     return (
       <div ref={header} className="navbar bg-base-100 shadow-md fixed top-0 left-0 right-0 z-40">
         <div className="navbar-start">
-          <label htmlFor="my-drawer" tabIndex="0" className="btn btn-ghost btn-circle lg:hidden">
+          <label htmlFor="my-drawer" tabIndex={0} className="btn btn-ghost btn-circle lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7"/>
@@ -124,5 +123,3 @@ const AdminLayout: NextPage = ({children}) => {
     );
   }
 }
-
-export default AdminLayout;

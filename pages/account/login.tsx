@@ -1,5 +1,5 @@
 import {NextPage} from "next";
-import {useContext, useEffect, useState} from "react";
+import {FormEvent, useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {setToken} from "../../lib/auth";
 import {useRouter} from "next/router";
@@ -33,7 +33,7 @@ const LoginPage: NextPage = () => {
     return cnic;
   }
 
-  function handleLogin(e) {
+  function handleLogin(e: FormEvent) {
     setLoading(true);
     axios.post("/api/account/login", {
       cnic: cnic.replace(/\D/g, ''),
