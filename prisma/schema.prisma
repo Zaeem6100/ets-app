@@ -29,7 +29,6 @@ model Teacher {
 model Student {
   id          String        @id
   User        User          @relation(fields: [id], references: [cnic])
-  fatherName  String
   dob         DateTime
   institute   String
   gender      String

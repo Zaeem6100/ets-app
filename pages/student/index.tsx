@@ -4,7 +4,7 @@ import type {NextPage} from 'next'
 const Dashboard: NextPage = () => {
   return (
     <>
-      <h1>Hello Next.js</h1>
+      <h1>Hello Student</h1>
     </>
   )
 }

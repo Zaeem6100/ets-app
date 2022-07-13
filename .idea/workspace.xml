@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f6bc75f1-10c3-420d-b5aa-85e466132c6f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/api/teachers/[id].ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/teachers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/DashboardLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/DashboardLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next-env.d.ts" afterDir="false" />
+    <list default="true" id="f6bc75f1-10c3-420d-b5aa-85e466132c6f" name="Changes" comment="teachers CRUD">
+      <change afterPath="$PROJECT_DIR$/pages/api/students/[id].ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/students/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/teachers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/teachers.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/subjects/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/subjects/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/student/exams.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/student/exams.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/teacher/subjects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teacher/subjects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/students.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/students.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/teachers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/teachers/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/student/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/student/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vercel.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/vercel.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +39,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages/api/teachers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages/api/students" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -61,6 +49,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pages/api/students" />
       <recent name="$PROJECT_DIR$/pages/api/teachers" />
     </key>
   </component>
@@ -86,8 +75,16 @@
       <updated>1657736562616</updated>
       <workItem from="1657736564240" duration="270000" />
       <workItem from="1657736868947" duration="1040000" />
-      <workItem from="1657737937513" duration="6604000" />
+      <workItem from="1657737937513" duration="8879000" />
     </task>
+    <task id="LOCAL-00001" summary="teachers CRUD">
+      <created>1657744671435</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1657744671435</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,6 +100,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="teachers CRUD" />
+    <option name="LAST_COMMIT_MESSAGE" value="teachers CRUD" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

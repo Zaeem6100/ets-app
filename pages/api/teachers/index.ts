@@ -1,5 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {prisma} from "../../../lib/db";
+import bcrypt from "bcrypt";
 
 type Teacher = {
   id: string,
@@ -31,7 +32,7 @@ async function createTeacher(req: NextApiRequest, res: NextApiResponse<Teacher>)
           create: {
             cnic: req.body.cnic,
             name: req.body.name,
-            password: req.body.password,
+            password: bcrypt.hashSync(req.body.password, 8),
             role: "teacher",
           }
         },
