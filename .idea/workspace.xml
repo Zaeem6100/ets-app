@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f6bc75f1-10c3-420d-b5aa-85e466132c6f" name="Changes" comment="students CRUD">
+    <list default="true" id="f6bc75f1-10c3-420d-b5aa-85e466132c6f" name="Changes" comment="dob picker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/AdminLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/AdminLayout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/admin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/students.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/students.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +70,7 @@
       <updated>1657736562616</updated>
       <workItem from="1657736564240" duration="270000" />
       <workItem from="1657736868947" duration="1040000" />
-      <workItem from="1657737937513" duration="11483000" />
+      <workItem from="1657737937513" duration="12445000" />
     </task>
     <task id="LOCAL-00001" summary="teachers CRUD">
       <created>1657744671435</created>
@@ -88,7 +86,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657746847833</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="dob picker">
+      <created>1657783839681</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1657783839681</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,7 +112,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="students CRUD" />
-    <option name="LAST_COMMIT_MESSAGE" value="students CRUD" />
+    <MESSAGE value="dob picker" />
+    <option name="LAST_COMMIT_MESSAGE" value="dob picker" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

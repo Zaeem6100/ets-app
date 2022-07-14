@@ -9,16 +9,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {NextRouter, useRouter} from "next/router";
 import {setToken} from "../lib/auth";
-import {createRef, PropsWithChildren, RefObject, useEffect, useState} from "react";
+import {createRef, PropsWithChildren, RefObject} from "react";
 
 export default function AdminLayout ({children}: PropsWithChildren<any>): JSX.Element {
-  const [headerHeight, setHeaderHeight] = useState(0);
   const header: RefObject<any> = createRef();
   const router: NextRouter = useRouter();
-
-  useEffect(() => {
-    if (header) setHeaderHeight(header.current?.clientHeight);
-  }, [header]);
 
   const items = [
     {
@@ -66,7 +61,7 @@ export default function AdminLayout ({children}: PropsWithChildren<any>): JSX.El
     return (
       <>
         <div>
-          <div style={{paddingTop: headerHeight}} className="drawer drawer-mobile">
+          <div className="drawer drawer-mobile pt-16">
             <input id="my-drawer" type="checkbox" className="drawer-toggle"/>
             <div className="drawer-content">
               {children}
@@ -108,13 +103,13 @@ export default function AdminLayout ({children}: PropsWithChildren<any>): JSX.El
           </label>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+          <a className="btn btn-ghost no-animation normal-case text-xl">daisyUI</a>
         </div>
         <div className="navbar-end">
           <button onClick={() => {
             setToken();
             router.push('/');
-          }} className="btn btn-primary space-x-0 sm:space-x-2">
+          }} className="btn btn-primary no-animation space-x-0 sm:space-x-2">
             <span className='hidden sm:block'>Logout</span>
             <FontAwesomeIcon icon={faArrowRightFromBracket}/>
           </button>
