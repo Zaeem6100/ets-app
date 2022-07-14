@@ -15,7 +15,7 @@ async function getSubjects(req: NextApiRequest, res: NextApiResponse) {
 
 async function updateSubjects(req: NextApiRequest, res: NextApiResponse) {
   // Delete all subjects of this teacher
-  await prisma.teacherSubject.deleteMany({where: {teacherId: req.body.id as string}});
+  await prisma.teacherSubject.deleteMany({where: {teacherId: req.query.id as string}});
 
   // Add updated subjects
   const teacher = await prisma.teacher.update({
