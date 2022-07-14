@@ -116,4 +116,6 @@ model TeacherSubject {
   subjectId Int
   Subject   Subject  @relation(fields: [subjectId], references: [id])
   createdAt DateTime @default(now())
+
+  @@unique([subjectId, teacherId], name: "TeacherSubjectUK")
 }

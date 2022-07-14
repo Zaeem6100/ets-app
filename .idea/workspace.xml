@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4373ea07-df44-40e3-82c2-90e25467a46e" name="Changes" comment="minor fixes">
+    <list default="true" id="4373ea07-df44-40e3-82c2-90e25467a46e" name="Changes" comment="return counts">
+      <change afterPath="$PROJECT_DIR$/pages/api/teachers/[id]/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/teachers/[id]/questions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/teachers/[id]/subjects.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/students.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/students.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/subjects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/subjects.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/admin/teachers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/teachers.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/students/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/students/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/subjects/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/subjects/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/teachers/[id].ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/api/teachers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/teachers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/seed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/seed.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +107,7 @@
       <updated>1657703686634</updated>
       <workItem from="1657703688340" duration="15246000" />
       <workItem from="1657786270241" duration="2929000" />
+      <workItem from="1657789213538" duration="8197000" />
     </task>
     <task id="LOCAL-00001" summary="adds student CRUD">
       <created>1657717199255</created>
@@ -122,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657787736302</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="return counts">
+      <created>1657789331478</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1657789331478</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,7 +153,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adds student CRUD" />
     <MESSAGE value="minor fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor fixes" />
+    <MESSAGE value="return counts" />
+    <option name="LAST_COMMIT_MESSAGE" value="return counts" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

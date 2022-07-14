@@ -31,7 +31,7 @@ async function getTeachers(req: NextApiRequest, res: NextApiResponse<Teacher[]>)
       }
     }
   });
-  console.log(teachers);
+
   teachers = teachers.map((teacher) => {
     delete teacher?.User?.password;
     return teacher;

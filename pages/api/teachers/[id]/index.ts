@@ -1,9 +1,8 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {prisma} from "../../../lib/db";
+import {prisma} from "../../../../lib/db";
 import bcrypt from "bcrypt";
 
 async function updateTeacher(req: NextApiRequest, res: NextApiResponse) {
-
   let newUser: { name: string, password?: string } = {
     name: req.body.name,
   };

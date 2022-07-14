@@ -1,7 +1,7 @@
 import AdminLayout from "../../components/AdminLayout";
 import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAdd, faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faAdd, faEdit, faPlus, faSave, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FormEvent, Fragment, useContext, useEffect, useState} from "react";
 import {Dialog, Transition} from "@headlessui/react";
 import axios from "axios";
@@ -23,13 +23,14 @@ type Teacher = {
 };
 
 export default function TeachersPage(): JSX.Element {
+  let [subjectTeacherId, setSubjectTeacherId] = useState("");
   let [isOpenModal, setIsOpenModal] = useState(false);
   let [editTeacher, setEditTeacher] = useState<Teacher | undefined>(undefined);
 
   let [teachers, setTeachers] = useState<Teacher[]>([]);
   const {setLoading} = useContext(LoaderContext);
 
-  useEffect(() => {
+  function refreshTeachers() {
     setLoading(true);
     axios.get("/api/teachers").then(res => {
       if (res.status === 200) {
@@ -40,6 +41,10 @@ export default function TeachersPage(): JSX.Element {
       console.error(e);
       setLoading(false);
     });
+  }
+
+  useEffect(() => {
+    refreshTeachers();
   }, []);
 
   function handleDelete(id: string) {
@@ -59,6 +64,7 @@ export default function TeachersPage(): JSX.Element {
     <>
       <AdminLayout>
         <TeacherModal/>
+        <TeacherSubjectModal/>
 
         <div className='py-16 px-4 container max-w-4xl mx-auto'>
           <div className='flex justify-between'>
@@ -104,7 +110,8 @@ export default function TeachersPage(): JSX.Element {
             <td>{teacher.institute}</td>
             <td className='capitalize'>{teacher.gender}</td>
             <td className='text-right'>
-              <button className='btn gap-2 btn-outline flex flex-nowrap'>
+              <button onClick={() => setSubjectTeacherId(teacher.id)}
+                      className='btn gap-2 btn-outline flex flex-nowrap'>
                 Subjects
                 <span className='badge'>{teacher._count?.TeacherSubject || 0}</span>
               </button>
@@ -134,6 +141,171 @@ export default function TeachersPage(): JSX.Element {
         ))}
         </tbody>
       </table>
+    );
+  }
+
+  function TeacherSubjectModal() {
+    type Subject = {
+      id?: number,
+      name: string,
+    };
+
+    type TeacherSubject = {
+      id?: number,
+      Subject: Subject,
+    };
+
+    const [subjects, setSubjects] = useState<TeacherSubject[]>([]);
+    const [allSubjects, setAllSubjects] = useState<Subject[]>([]);
+    const [selectSubject, setSelectSubjectId] = useState<number | undefined>(undefined);
+
+    useEffect(() => {
+      if (subjectTeacherId !== "") {
+        setLoading(true);
+
+        let requests = [
+          axios.get(`/api/teachers/${subjectTeacherId}/subjects`),
+          axios.get("/api/subjects"),
+        ];
+
+        axios
+          .all(requests)
+          .then(axios.spread((teacherSubjectsRes, subjectsRes) => {
+            if (subjectsRes.status === 200 && subjectsRes.status === 200) {
+              setSubjects(teacherSubjectsRes.data);
+              setAllSubjects(subjectsRes.data);
+              setSelectSubjectId(subjectsRes.data[0]?.id);
+              setLoading(false);
+            }
+          }))
+          .catch(e => {
+            console.error(e);
+            setLoading(false);
+          });
+      }
+    }, [subjectTeacherId]);
+
+    function handleSubmit() {
+      setLoading(true);
+      axios
+        .put(`/api/teachers/${subjectTeacherId}/subjects`, {subjects: subjects?.map(s => s.Subject.id)})
+        .then(res => {
+          if (res.status === 200) {
+            refreshTeachers();
+            setLoading(false);
+          }
+        })
+        .catch(e => {
+          console.error(e);
+          setLoading(false);
+        });
+      setSubjectTeacherId("");
+    }
+
+    return (
+      <Transition appear show={subjectTeacherId !== ""} as={Fragment}>
+        <Dialog as="div" className="relative z-40" onClose={() => setSubjectTeacherId("")}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 backdrop-filter backdrop-blur-md bg-black bg-opacity-25"/>
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel>
+                  <div className="relative bg-base-100 card ">
+                    <div className="card-body">
+                      <h3 className="card-title flex justify-between">Subjects
+                        <div className='ml-8 space-x-2 flex items-center'>
+                          <button
+                            onClick={handleSubmit}
+                            className='btn gap-2'>
+                            Save
+                            <FontAwesomeIcon icon={faSave}/>
+                          </button>
+                          <button
+                            onClick={() => setSubjectTeacherId("")}
+                            className='btn btn-outline btn-square'>
+                            <FontAwesomeIcon icon={faTimes}/>
+                          </button>
+                        </div>
+                      </h3>
+
+                      <div className='w-full mt-8'>
+                        <div className='w-full input-group flex items-center'>
+                          <select
+                            className="flex-1 select select-bordered"
+                            value={selectSubject}
+                            onChange={e => setSelectSubjectId(Number(e.target.value))}
+                          >
+                            {allSubjects.map(
+                              (subject, index) => (
+                                <option key={index} value={subject.id}>
+                                  {subject.name}
+                                </option>
+                              )
+                            )}
+                          </select>
+                          <button
+                            onClick={() => {
+                              const sub = allSubjects.find(s => s.id === selectSubject);
+                              let newSubjects = [...subjects].filter(s => s.Subject.id !== selectSubject);
+                              if (sub) {
+                                newSubjects.push({Subject: sub});
+                                setSubjects(newSubjects);
+                              }
+                            }}
+                            className='btn justify-self-end'>
+                            <FontAwesomeIcon icon={faPlus}/>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div>
+                        {subjects?.map((subject, index) => (
+                          <div>
+                            <div key={index} className='flex items-center justify-between space-x-2'>
+                              <div className='flex flex-col'>
+                                <span className='text-sm'>{subject.Subject.name}</span>
+                              </div>
+                              <div className='flex flex-col'>
+                                <button onClick={() => {
+                                  const newSubjects = [...subjects];
+                                  newSubjects.splice(index, 1);
+                                  setSubjects(newSubjects);
+                                }} className='btn btn-ghost btn-square'>
+                                  <FontAwesomeIcon icon={faTrash}/>
+                                </button>
+                              </div>
+                            </div>
+                            <div className='border-t border-gray-300'/>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     );
   }
 
