@@ -23,7 +23,9 @@ type Student = {
   dob: Date,
   institute: string,
   gender: string,
-  examCount: number,
+  _count?: {
+    StudentExam: number,
+  }
 };
 
 export default function StudentsPage(): JSX.Element {
@@ -111,7 +113,7 @@ export default function StudentsPage(): JSX.Element {
             <td className='text-right'>
               <button className='btn gap-2 btn-outline flex flex-nowrap'>
                 Exams
-                <span className='badge'>{student.examCount}</span>
+                <span className='badge'>{student._count?.StudentExam || 0}</span>
               </button>
             </td>
             <td className='text-right space-x-2'>

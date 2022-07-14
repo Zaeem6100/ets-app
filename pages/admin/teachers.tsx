@@ -16,8 +16,10 @@ type Teacher = {
   },
   institute: string,
   gender: string,
-  questionCount: number,
-  subjectCount: number,
+  _count?: {
+    Question: number,
+    TeacherSubject: number,
+  }
 };
 
 export default function TeachersPage(): JSX.Element {
@@ -104,13 +106,13 @@ export default function TeachersPage(): JSX.Element {
             <td className='text-right'>
               <button className='btn gap-2 btn-outline flex flex-nowrap'>
                 Subjects
-                <span className='badge'>{teacher.subjectCount}</span>
+                <span className='badge'>{teacher._count?.TeacherSubject || 0}</span>
               </button>
             </td>
             <td className='text-right'>
               <button className='btn gap-2 btn-outline flex flex-nowrap'>
                 Questions
-                <span className='badge'>{teacher.questionCount}</span>
+                <span className='badge'>{teacher._count?.Question || 0}</span>
               </button>
             </td>
             <td className='text-right space-x-2'>

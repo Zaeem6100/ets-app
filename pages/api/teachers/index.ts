@@ -13,10 +13,25 @@ type Teacher = {
   institute: string,
   gender: string,
   createdAt: Date,
+  _count?: {
+    Question: number,
+    TeacherSubject: number,
+  }
 }
 
 async function getTeachers(req: NextApiRequest, res: NextApiResponse<Teacher[]>) {
-  let teachers: Teacher[] = await prisma.teacher.findMany({include: {User: true}});
+  let teachers: Teacher[] = await prisma.teacher.findMany({
+    include: {
+      User: true,
+      _count: {
+        select: {
+          Question: true,
+          TeacherSubject: true,
+        }
+      }
+    }
+  });
+  console.log(teachers);
   teachers = teachers.map((teacher) => {
     delete teacher?.User?.password;
     return teacher;

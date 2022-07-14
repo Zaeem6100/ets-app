@@ -10,8 +10,10 @@ import LoaderContext from "../../context/LoaderContext";
 type Subject = {
   id: number,
   name: string,
-  teacherCount: number,
-  questionCount: number
+  _count?: {
+    TeacherSubject: number,
+    Question: number,
+  }
 };
 
 export default function SubjectsPage(): JSX.Element {
@@ -96,13 +98,13 @@ export default function SubjectsPage(): JSX.Element {
             <td className='text-right'>
               <button className='btn gap-2 btn-outline flex flex-nowrap'>
                 Teachers
-                <span className='badge'>{subject.teacherCount}</span>
+                <span className='badge'>{subject._count?.TeacherSubject || 0}</span>
               </button>
             </td>
             <td className='text-right'>
               <button className='btn gap-2 btn-outline flex flex-nowrap'>
                 Questions
-                <span className='badge'>{subject.questionCount}</span>
+                <span className='badge'>{subject._count?.Question || 0}</span>
               </button>
             </td>
             <td className='text-right space-x-2'>

@@ -1,24 +1,35 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {prisma} from "../../../lib/db";
 
-type Data = {
+type Subject = {
   id: number,
   name: string,
-  questionCount: number,
-  teacherCount: number,
+  _count?: {
+    TeacherSubject: number,
+    Question: number,
+  }
 }
 
-async function getSubjects(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const subjects = await prisma.subject.findMany();
+async function getSubjects(req: NextApiRequest, res: NextApiResponse<Subject[]>) {
+  const subjects: Subject[] = await prisma.subject.findMany({
+    include: {
+      _count: {
+        select: {
+          TeacherSubject: true,
+          Question: true,
+        }
+      }
+    }
+  });
   return res.status(200).json(subjects);
 }
 
-async function createSubject(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const subject = await prisma.subject.create({data: {name: req.body.name,}});
+async function createSubject(req: NextApiRequest, res: NextApiResponse<Subject>) {
+  const subject: Subject = await prisma.subject.create({data: {name: req.body.name,}});
   return res.status(200).json(subject);
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case "GET":
       return getSubjects(req, res);

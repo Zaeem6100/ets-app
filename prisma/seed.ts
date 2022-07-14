@@ -2,9 +2,11 @@ import bcrypt from "bcrypt";
 import {prisma} from "../lib/db";
 
 async function main() {
-  const admin = await prisma.user.upsert({
+  const user1 = await prisma.user.upsert({
     where: {cnic: '1234567891234'},
-    update: {},
+    update: {
+      password: bcrypt.hashSync('123456', 8),
+    },
     create: {
       cnic: '1234567891234',
       name: 'admin',
@@ -13,18 +15,7 @@ async function main() {
     },
   });
 
-  const teacher = await prisma.user.upsert({
-    where: {cnic: '1234567891235'},
-    update: {},
-    create: {
-      cnic: '1234567891235',
-      name: 'Teacher',
-      role: 'teacher',
-      password: bcrypt.hashSync('123456', 8),
-    },
-  });
-
-  console.log({admin, teacher});
+  console.log({user1});
 }
 
 main()
