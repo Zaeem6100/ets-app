@@ -10,6 +10,7 @@ import {
 import {NextRouter, useRouter} from "next/router";
 import {setToken} from "../lib/auth";
 import {createRef, PropsWithChildren, RefObject} from "react";
+import ThemeChanger from "./ThemeChanger";
 
 export default function AdminLayout({children}: PropsWithChildren<any>): JSX.Element {
   const header: RefObject<any> = createRef();
@@ -108,10 +109,11 @@ export default function AdminLayout({children}: PropsWithChildren<any>): JSX.Ele
           </Link>
         </div>
         <div className="navbar-end">
+          <ThemeChanger/>
           <button onClick={() => {
             setToken();
             router.push('/');
-          }} className="btn btn-primary no-animation space-x-0 sm:space-x-2">
+          }} className="ml-4 btn btn-primary no-animation space-x-0 sm:space-x-2">
             <span className='hidden sm:block'>Logout</span>
             <FontAwesomeIcon icon={faArrowRightFromBracket}/>
           </button>

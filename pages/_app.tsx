@@ -2,11 +2,17 @@ import '../globals.css'
 import type {AppProps} from 'next/app'
 import ValidateRoute from "../components/ValidateRoute";
 import LoaderContext from "../context/LoaderContext";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Head from "next/head";
 
 function MyApp({Component, pageProps}: AppProps) {
   const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (window !== undefined) {
+      document.body.setAttribute("data-theme", localStorage.getItem('theme') || 'light');
+    }
+  }, []);
 
   return <>
     <Head>
