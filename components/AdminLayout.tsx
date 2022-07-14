@@ -11,7 +11,7 @@ import {NextRouter, useRouter} from "next/router";
 import {setToken} from "../lib/auth";
 import {createRef, PropsWithChildren, RefObject} from "react";
 
-export default function AdminLayout ({children}: PropsWithChildren<any>): JSX.Element {
+export default function AdminLayout({children}: PropsWithChildren<any>): JSX.Element {
   const header: RefObject<any> = createRef();
   const router: NextRouter = useRouter();
 
@@ -103,7 +103,9 @@ export default function AdminLayout ({children}: PropsWithChildren<any>): JSX.El
           </label>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost no-animation normal-case text-xl">daisyUI</a>
+          <Link href={"/admin"} passHref>
+            <a className="btn btn-ghost no-animation normal-case text-xl">ETS</a>
+          </Link>
         </div>
         <div className="navbar-end">
           <button onClick={() => {

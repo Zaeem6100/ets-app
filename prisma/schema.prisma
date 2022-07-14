@@ -18,12 +18,13 @@ model User {
 }
 
 model Teacher {
-  id        String     @id
-  User      User       @relation(fields: [id], references: [cnic])
-  institute String
-  gender    String
-  Question  Question[]
-  createdAt DateTime   @default(now())
+  id             String           @id
+  User           User             @relation(fields: [id], references: [cnic])
+  institute      String
+  gender         String
+  Question       Question[]
+  createdAt      DateTime         @default(now())
+  TeacherSubject TeacherSubject[]
 }
 
 model Student {
@@ -44,7 +45,7 @@ model Question {
   op2              String
   op3              String
   op4              String
-  answer           String
+  answer           Int
   difficulty       Int
   teacherId        String
   teacher          Teacher            @relation(fields: [teacherId], references: [id])
@@ -74,6 +75,8 @@ model StudentExam {
   Exam             Exam               @relation(fields: [examId], references: [id])
   createdAt        DateTime           @default(now())
   ComputedQuestion ComputedQuestion[]
+
+  @@unique([examId, studentId], name: "studentExamUK")
 }
 
 model ComputedQuestion {
@@ -82,8 +85,10 @@ model ComputedQuestion {
   StudentExam   StudentExam @relation(fields: [studentExamId], references: [id])
   questionId    Int
   Question      Question    @relation(fields: [questionId], references: [id])
-  markedAnswer  String
+  markedAnswer  Int?
   createdAt     DateTime    @default(now())
+
+  @@unique([studentExamId, questionId], name: "studentExamQuestionUK")
 }
 
 model Anomaly {
@@ -96,9 +101,19 @@ model Anomaly {
 }
 
 model Subject {
-  id        Int        @id @default(autoincrement())
-  name      String     @unique
-  createdAt DateTime   @default(now())
-  Question  Question[]
-  Exam      Exam[]
+  id             Int              @id @default(autoincrement())
+  name           String           @unique
+  createdAt      DateTime         @default(now())
+  Question       Question[]
+  Exam           Exam[]
+  TeacherSubject TeacherSubject[]
+}
+
+model TeacherSubject {
+  id        Int      @id @default(autoincrement())
+  teacherId String
+  Teacher   Teacher  @relation(fields: [teacherId], references: [id])
+  subjectId Int
+  Subject   Subject  @relation(fields: [subjectId], references: [id])
+  createdAt DateTime @default(now())
 }

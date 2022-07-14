@@ -3,11 +3,15 @@ import type {AppProps} from 'next/app'
 import ValidateRoute from "../components/ValidateRoute";
 import LoaderContext from "../context/LoaderContext";
 import {useState} from "react";
+import Head from "next/head";
 
 function MyApp({Component, pageProps}: AppProps) {
   const [isLoading, setLoading] = useState(false);
 
   return <>
+    <Head>
+      <title>ETS</title>
+    </Head>
     <ValidateRoute>
       <LoaderContext.Provider value={{isLoading, setLoading}}>
         {isLoading &&
