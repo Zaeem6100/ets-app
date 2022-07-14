@@ -6,6 +6,12 @@ import {FormEvent, Fragment, useContext, useEffect, useState} from "react";
 import {Dialog, Transition} from "@headlessui/react";
 import axios from "axios";
 import LoaderContext from "../../context/LoaderContext";
+import format from 'date-fns/format';
+
+import {Calendar} from 'react-date-range';
+
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 
 type Student = {
   id: string,
@@ -100,7 +106,7 @@ export default function StudentsPage(): JSX.Element {
           <tr key={index}>
             <td>{student.User.name}</td>
             <td>{student.institute}</td>
-            <td>{student.dob.toString()}</td>
+            <td>{format(new Date(student.dob), 'dd/MM/yyyy')}</td>
             <td className='capitalize'>{student.gender}</td>
             <td className='text-right'>
               <button className='btn gap-2 btn-outline flex flex-nowrap'>
@@ -134,7 +140,7 @@ export default function StudentsPage(): JSX.Element {
     const [name, setName] = useState(editStudent ? editStudent.User.name : "");
     const [cnic, setCnic] = useState(editStudent ? editStudent.id : "");
     const [password, setPassword] = useState("");
-    const [dob, setDob] = useState(editStudent ? editStudent.dob : new Date());
+    const [dob, setDob] = useState(editStudent ? new Date(editStudent.dob) : new Date());
     const [institute, setInstitute] = useState(editStudent ? editStudent.institute : "");
     const [gender, setGender] = useState(editStudent ? editStudent.gender : "male");
 
@@ -266,8 +272,6 @@ export default function StudentsPage(): JSX.Element {
                                  className="input input-bordered"/>
                         </div>
 
-                        {/*TODO: pick dob*/}
-
                         <div className='input-group'>
                           <span className='w-full'>Institute</span>
                           <input onChange={(e) => setInstitute(e.target.value)}
@@ -301,6 +305,14 @@ export default function StudentsPage(): JSX.Element {
                               <span className="label-text">Female</span>
                             </label>
                           </div>
+                        </div>
+
+                        <div>
+                          <div className='text-left'>Date of Birth</div>
+                          <Calendar
+                            date={dob}
+                            onChange={(date: Date) => setDob(date)}
+                          />
                         </div>
 
                         <div className='flex w-full space-x-4 items-end justify-end'>
