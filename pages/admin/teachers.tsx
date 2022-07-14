@@ -279,8 +279,8 @@ export default function TeachersPage(): JSX.Element {
 
                       <div>
                         {subjects?.map((subject, index) => (
-                          <div>
-                            <div key={index} className='flex items-center justify-between space-x-2'>
+                          <div key={index}>
+                            <div className='flex items-center justify-between space-x-2'>
                               <div className='flex flex-col'>
                                 <span className='text-sm'>{subject.Subject.name}</span>
                               </div>
