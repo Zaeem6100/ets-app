@@ -1,7 +1,7 @@
 import AdminLayout from "../../components/AdminLayout";
 import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAdd, faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faAdd, faEdit, faPlus, faSave, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FormEvent, Fragment, useContext, useEffect, useState} from "react";
 import {Dialog, Transition} from "@headlessui/react";
 import axios from "axios";
@@ -17,13 +17,14 @@ type Subject = {
 };
 
 export default function SubjectsPage(): JSX.Element {
+  let [teacherSubjectId, setTeacherSubjectId] = useState(-1);
   let [isOpenModal, setIsOpenModal] = useState(false);
   let [editSubject, setEditSubject] = useState<Subject | undefined>(undefined);
 
   let [subjects, setSubjects] = useState<Subject[]>([]);
   const {setLoading} = useContext(LoaderContext);
 
-  useEffect(() => {
+  function refreshSubjects() {
     setLoading(true);
     axios.get("/api/subjects").then(res => {
       if (res.status === 200) {
@@ -34,6 +35,10 @@ export default function SubjectsPage(): JSX.Element {
       console.error(e);
       setLoading(false);
     });
+  }
+
+  useEffect(() => {
+    refreshSubjects();
   }, []);
 
   function handleDelete(id: number) {
@@ -53,6 +58,7 @@ export default function SubjectsPage(): JSX.Element {
     <>
       <AdminLayout>
         <SubjectModal/>
+        <SubjectTeacherModal/>
 
         <div className='py-16 px-4 container max-w-4xl mx-auto'>
           <div className='flex justify-between'>
@@ -96,7 +102,8 @@ export default function SubjectsPage(): JSX.Element {
             <th>{subject.id}</th>
             <td>{subject.name}</td>
             <td className='text-right'>
-              <button className='btn gap-2 btn-outline flex flex-nowrap'>
+              <button onClick={() => setTeacherSubjectId(subject.id)}
+                      className='btn gap-2 btn-outline flex flex-nowrap'>
                 Teachers
                 <span className='badge'>{subject._count?.TeacherSubject || 0}</span>
               </button>
@@ -126,6 +133,174 @@ export default function SubjectsPage(): JSX.Element {
         ))}
         </tbody>
       </table>
+    );
+  }
+
+  function SubjectTeacherModal() {
+
+    type Teacher = {
+      id?: string,
+      User: {
+        name: string,
+      }
+    };
+
+    type TeacherSubject = {
+      id?: number,
+      Teacher: Teacher,
+    };
+
+    const [teachers, setTeachers] = useState<TeacherSubject[]>([]);
+    const [allTeachers, setAllTeachers] = useState<Teacher[]>([]);
+    const [selectTeacher, setSelectTeacherId] = useState<string | undefined>(undefined);
+
+    useEffect(() => {
+      if (teacherSubjectId !== -1) {
+        setLoading(true);
+
+        let requests = [
+          axios.get(`/api/subjects/${teacherSubjectId}/teachers`),
+          axios.get("/api/teachers"),
+        ];
+
+        axios
+          .all(requests)
+          .then(axios.spread((subjectTeacherRes, teacherRes) => {
+            if (teacherRes.status === 200 && teacherRes.status === 200) {
+              setTeachers(subjectTeacherRes.data);
+              setAllTeachers(teacherRes.data);
+              setSelectTeacherId(teacherRes.data[0]?.id);
+              setLoading(false);
+            }
+          }))
+          .catch(e => {
+            console.error(e);
+            setLoading(false);
+          });
+      }
+    }, [teacherSubjectId]);
+
+    function handleSubmit() {
+      setLoading(true);
+      axios
+        .put(`/api/subjects/${teacherSubjectId}/teachers`, {teachers: teachers?.map(s => s.Teacher.id)})
+        .then(res => {
+          if (res.status === 200) {
+            refreshSubjects();
+            setLoading(false);
+          }
+        })
+        .catch(e => {
+          console.error(e);
+          setLoading(false);
+        });
+      setTeacherSubjectId(-1);
+    }
+
+    return (
+      <Transition appear show={teacherSubjectId !== -1} as={Fragment}>
+        <Dialog as="div" className="relative z-40" onClose={() => setTeacherSubjectId(-1)}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 backdrop-filter backdrop-blur-md bg-black bg-opacity-25"/>
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel>
+                  <div className="relative bg-base-100 card ">
+                    <div className="card-body">
+                      <h3 className="card-title flex justify-between">Teachers
+                        <div className='ml-8 space-x-2 flex items-center'>
+                          <button
+                            onClick={handleSubmit}
+                            className='btn gap-2'>
+                            Save
+                            <FontAwesomeIcon icon={faSave}/>
+                          </button>
+                          <button
+                            onClick={() => setTeacherSubjectId(-1)}
+                            className='btn btn-outline btn-square'>
+                            <FontAwesomeIcon icon={faTimes}/>
+                          </button>
+                        </div>
+                      </h3>
+
+                      <div className='w-full mt-8'>
+                        <div className='w-full input-group flex items-center'>
+                          <select
+                            className="flex-1 select select-bordered"
+                            value={selectTeacher}
+                            onChange={e => setSelectTeacherId(e.target.value)}
+                          >
+                            {allTeachers.map(
+                              (teacher, index) => (
+                                <option key={index} value={teacher.id}>
+                                  {teacher.User.name}
+                                </option>
+                              )
+                            )}
+                          </select>
+                          <button
+                            onClick={() => {
+                              const tch = allTeachers.find(s => s.id === selectTeacher);
+                              let newSubjects = [...teachers].filter(s => s.Teacher.id !== selectTeacher);
+                              if (tch) {
+                                newSubjects.push({Teacher: tch});
+                                setTeachers(newSubjects);
+                              }
+                            }}
+                            className='btn justify-self-end'>
+                            <FontAwesomeIcon icon={faPlus}/>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div>
+                        {teachers?.map((teacher, index) => (
+                          <div key={index}>
+                            <div className='flex items-center justify-between space-x-2'>
+                              <div className='flex flex-col'>
+                                <span className='text-sm'>{teacher.Teacher.User.name}</span>
+                              </div>
+                              <div className='flex flex-col'>
+                                <button onClick={() => {
+                                  const newTeacher = [...teachers];
+                                  newTeacher.splice(index, 1);
+                                  setTeachers(newTeacher);
+                                }} className='btn btn-ghost btn-square'>
+                                  <FontAwesomeIcon icon={faTrash}/>
+                                </button>
+                              </div>
+                            </div>
+                            <div className='border-t border-gray-300'/>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     );
   }
 
