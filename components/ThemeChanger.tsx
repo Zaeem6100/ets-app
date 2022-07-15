@@ -13,11 +13,11 @@ export default function ThemeChanger() {
   }
 
   return (
-    <div className="dropdown">
+    <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-square">
         <FontAwesomeIcon icon={faCog}/>
       </label>
-      <ul tabIndex={0} className="dropdown-content h-64 overflow-y-scroll menu p-2 shadow bg-base-100 rounded-box w-52">
+      <ul tabIndex={0} className="dropdown-content h-64 overflow-y-scroll menu p-2 shadow bg-base-200 rounded-box w-52">
         {
           themes.map((theme, index) => (
             <li key={index} onClick={() => setTheme(theme)}>
