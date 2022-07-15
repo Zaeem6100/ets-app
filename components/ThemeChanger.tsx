@@ -1,4 +1,6 @@
 import {useState} from "react";
+import {faCog} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ThemeChanger() {
   const [selectedTheme, setSelectedTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -12,7 +14,9 @@ export default function ThemeChanger() {
 
   return (
     <div className="dropdown">
-      <label tabIndex={0} className="btn btn-ghost">Theme</label>
+      <label tabIndex={0} className="btn btn-ghost btn-square">
+        <FontAwesomeIcon icon={faCog}/>
+      </label>
       <ul tabIndex={0} className="dropdown-content h-64 overflow-y-scroll menu p-2 shadow bg-base-100 rounded-box w-52">
         {
           themes.map((theme, index) => (
