@@ -25,7 +25,7 @@ export default function DashboardLayout({children}: PropsWithChildren<any>) {
       <div className="navbar bg-base-100 shadow-md fixed top-0 left-0 right-0 z-40">
         <div className="navbar-start"/>
         <div className="navbar-center">
-          <Link href={"/admin"} passHref>
+          <Link href={"/"} passHref>
             <a className="btn btn-ghost no-animation normal-case text-xl">ETS</a>
           </Link>
         </div>
