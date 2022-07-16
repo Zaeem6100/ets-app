@@ -5,9 +5,8 @@ import axios from "axios";
 import {useRouter} from "next/router";
 import {getPayload} from "../../../lib/auth";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAdd} from "@fortawesome/free-solid-svg-icons";
+import {faAdd, faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 import {Dialog, Transition} from "@headlessui/react";
-import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 
 export default function SubjectQuestionPage() {
 
@@ -55,8 +54,8 @@ export default function SubjectQuestionPage() {
     <DashboardLayout>
       <AddQuestionModal/>
 
-      <div className='py-16 container mx-auto'>
-        <div className='flex justify-between'>
+      <div className='pb-16 px-4 container mx-auto'>
+        <div className='mt-16 flex justify-between sticky top-0'>
           <div className='flex items-center justify-center gap-2'>
             <button onClick={() => router.back()} className='btn btn-ghost btn-square'>
               <FontAwesomeIcon icon={faArrowLeft}/>
@@ -74,9 +73,9 @@ export default function SubjectQuestionPage() {
           </div>
         </div>
 
-        <div className='pt-8'>
+        <div className='pt-8 space-y-8'>
           {questions?.map((question) => (
-            <div className='card shadow-md'>
+            <div className='card shadow-lg'>
               <div className='card-body'>
                 <div>Statement</div>
                 <div className='card-title'>
@@ -90,25 +89,25 @@ export default function SubjectQuestionPage() {
                 <div className='pt-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
                   <div
                     className={`${question.answer === 1 && 'border border-2 border-success'} py-2 px-8 rounded-box bg-base-200`}>
-                    <div>Option A</div>
+                    <div className='text-xs'>Option A</div>
                     <div>{question.op1}</div>
                   </div>
 
                   <div
                     className={`${question.answer === 2 && 'border border-2 border-success'} py-2 px-8 rounded-box bg-base-200`}>
-                    <div>Option B</div>
+                    <div className='text-xs'>Option B</div>
                     <div>{question.op2}</div>
                   </div>
 
                   <div
                     className={`${question.answer === 3 && 'border border-2 border-success'} py-2 px-8 rounded-box bg-base-200`}>
-                    <div>Option C</div>
+                    <div className='text-xs'>Option C</div>
                     <div>{question.op3}</div>
                   </div>
 
                   <div
                     className={`${question.answer === 4 && 'border border-2 border-success'} py-2 px-8 rounded-box bg-base-200`}>
-                    <div>Option D</div>
+                    <div className='text-xs'>Option D</div>
                     <div>{question.op4}</div>
                   </div>
                 </div>

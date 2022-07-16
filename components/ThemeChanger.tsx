@@ -8,6 +8,7 @@ export default function ThemeChanger() {
 
   function setTheme(name: string) {
     document.body.setAttribute("data-theme", name);
+    document.querySelector("html")?.setAttribute("data-theme", name);
     localStorage.setItem('theme', name);
     setSelectedTheme(name);
   }
