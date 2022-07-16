@@ -1,12 +1,22 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {prisma} from "../../../../lib/db";
+import {prisma} from "../../../../../lib/db";
 
 async function getSubjects(req: NextApiRequest, res: NextApiResponse) {
   const teacher = await prisma.teacher.findUnique({
     where: {id: req.query.id as string},
     include: {
       TeacherSubject: {
-        include: {Subject: true}
+        include: {
+          Subject: {
+            include: {
+              _count: {
+                select: {
+                  Question: true
+                }
+              }
+            }
+          }
+        }
       }
     }
   });

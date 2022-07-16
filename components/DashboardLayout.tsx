@@ -11,7 +11,7 @@ export default function DashboardLayout({children}: PropsWithChildren<any>) {
 
   return (
     <>
-      <div className='h-screen'>
+      <div className='min-h-screen'>
         <Navbar/>
         <div className='pt-16 h-full w-full'>
           {children}

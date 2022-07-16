@@ -1,63 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f6bc75f1-10c3-420d-b5aa-85e466132c6f" name="Changes" comment="adds teacher selector in subjects">
+    <list default="true" id="0177c9cd-903a-41ed-93dc-92bd6b8fcf87" name="Changes" comment="theme fix">
+      <change afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/teachers/[id]/subjects/[sid]/questions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/teacher/subject/[id].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/DashboardLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/DashboardLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ThemeChanger.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ThemeChanger.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/account/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/students.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/students.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/subjects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/subjects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/teachers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/teachers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/teachers/[id]/subjects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/teachers/[id]/subjects/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teacher/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/teacher/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teacher/subjects.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="TypeScript File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2Bts91ilOPOV7WpqA4s5QwvPXRV" />
+  <component name="ProjectId" id="2C1EOUX7lXfJJRO2OxvMYR26SZY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages/api/students" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/pages/api/students" />
-      <recent name="$PROJECT_DIR$/pages/api/teachers" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/pages/api/subjects/[id]" />
-    </key>
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/ameerhmzx/nextcloud/projects/zaeem/ets-app",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "ts.external.directory.path": "/home/ameerhmzx/nextcloud/projects/zaeem/ets-app/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="RunManager">
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -73,51 +64,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f6bc75f1-10c3-420d-b5aa-85e466132c6f" name="Changes" comment="" />
-      <created>1657736562616</created>
+      <changelist id="0177c9cd-903a-41ed-93dc-92bd6b8fcf87" name="Changes" comment="" />
+      <created>1657961660174</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1657736562616</updated>
-      <workItem from="1657736564240" duration="270000" />
-      <workItem from="1657736868947" duration="1040000" />
-      <workItem from="1657737937513" duration="19617000" />
+      <updated>1657961660174</updated>
+      <workItem from="1657961662995" duration="2548000" />
     </task>
-    <task id="LOCAL-00001" summary="teachers CRUD">
-      <created>1657744671435</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1657744671435</updated>
-    </task>
-    <task id="LOCAL-00002" summary="teachers CRUD">
-      <created>1657746847833</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1657746847833</updated>
-    </task>
-    <task id="LOCAL-00003" summary="dob picker">
-      <created>1657783839681</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1657783839681</updated>
-    </task>
-    <task id="LOCAL-00004" summary="fixes layout bounces">
-      <created>1657784788649</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1657784788649</updated>
-    </task>
-    <task id="LOCAL-00005" summary="adds teacher selector in subjects">
-      <created>1657874385069</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1657874385069</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,11 +88,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="students CRUD" />
-    <MESSAGE value="dob picker" />
-    <MESSAGE value="fixes layout bounces" />
-    <MESSAGE value="adds teacher selector in subjects" />
-    <option name="LAST_COMMIT_MESSAGE" value="adds teacher selector in subjects" />
+    <MESSAGE value="theme fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="theme fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

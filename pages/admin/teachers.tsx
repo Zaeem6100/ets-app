@@ -76,7 +76,7 @@ export default function TeachersPage(): JSX.Element {
               <button onClick={() => {
                 setEditTeacher(undefined);
                 setIsOpenModal(true);
-              }} className='btn gap-2'>
+              }} className='btn btn-primary gap-2'>
                 <FontAwesomeIcon icon={faAdd}/>
                 <span className='hidden sm:block'>Add Teacher</span>
               </button>
@@ -111,13 +111,13 @@ export default function TeachersPage(): JSX.Element {
             <td className='capitalize'>{teacher.gender}</td>
             <td className='text-right'>
               <button onClick={() => setSubjectTeacherId(teacher.id)}
-                      className='btn gap-2 btn-outline flex flex-nowrap'>
+                      className='btn gap-2 btn-primary btn-outline flex flex-nowrap'>
                 Subjects
                 <span className='badge'>{teacher._count?.TeacherSubject || 0}</span>
               </button>
             </td>
             <td className='text-right'>
-              <button className='btn gap-2 btn-outline flex flex-nowrap'>
+              <button className='btn btn-primary gap-2 btn-outline flex flex-nowrap'>
                 Questions
                 <span className='badge'>{teacher._count?.Question || 0}</span>
               </button>
@@ -127,7 +127,7 @@ export default function TeachersPage(): JSX.Element {
                 <button onClick={() => {
                   setEditTeacher(teacher);
                   setIsOpenModal(true);
-                }} className='btn gap-2 btn-square'>
+                }} className='btn btn-primary gap-2 btn-square'>
                   <FontAwesomeIcon icon={faEdit}/>
                 </button>
               </div>
@@ -235,13 +235,13 @@ export default function TeachersPage(): JSX.Element {
                         <div className='ml-8 space-x-2 flex items-center'>
                           <button
                             onClick={handleSubmit}
-                            className='btn gap-2'>
+                            className='btn btn-primary gap-2'>
                             Save
                             <FontAwesomeIcon icon={faSave}/>
                           </button>
                           <button
                             onClick={() => setSubjectTeacherId("")}
-                            className='btn btn-outline btn-square'>
+                            className='btn btn-primary btn-outline btn-square'>
                             <FontAwesomeIcon icon={faTimes}/>
                           </button>
                         </div>
@@ -271,7 +271,7 @@ export default function TeachersPage(): JSX.Element {
                                 setSubjects(newSubjects);
                               }
                             }}
-                            className='btn justify-self-end'>
+                            className='btn btn-primary justify-self-end'>
                             <FontAwesomeIcon icon={faPlus}/>
                           </button>
                         </div>
@@ -480,9 +480,9 @@ export default function TeachersPage(): JSX.Element {
 
                         <div className='flex w-full space-x-4 items-end justify-end'>
                           <button onClick={() => setIsOpenModal(false)} type='reset'
-                                  className='btn btn-outline justify-self-end'>Cancel
+                                  className='btn btn-primary btn-outline justify-self-end'>Cancel
                           </button>
-                          <button type='submit' className='btn justify-self-end'>
+                          <button type='submit' className='btn btn-primary justify-self-end'>
                             {editTeacher ? 'Update' : 'Create'}
                           </button>
                         </div>

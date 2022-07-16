@@ -57,7 +57,7 @@ const LoginPage: NextPage = () => {
 
   return (
     <>
-      <div className='pt-48 flex items-center justify-center'>
+      <div className='py-16 flex items-center justify-center min-h-screen'>
         <form onSubmit={handleLogin} className='card max-w-96 bg-base-100 shadow-xl'>
           <div className='card-body'>
             <h2 className='card-title'>Login</h2>

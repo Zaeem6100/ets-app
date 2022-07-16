@@ -76,7 +76,7 @@ export default function StudentsPage(): JSX.Element {
               <button onClick={() => {
                 setEditStudent(undefined);
                 setIsOpenModal(true);
-              }} className='btn gap-2'>
+              }} className='btn btn-primary gap-2'>
                 <FontAwesomeIcon icon={faAdd}/>
                 <span className='hidden sm:block'>Add Student</span>
               </button>
@@ -111,7 +111,7 @@ export default function StudentsPage(): JSX.Element {
             <td>{format(new Date(student.dob), 'dd/MM/yyyy')}</td>
             <td className='capitalize'>{student.gender}</td>
             <td className='text-right'>
-              <button className='btn gap-2 btn-outline flex flex-nowrap'>
+              <button className='btn gap-2 btn-primary btn-outline flex flex-nowrap'>
                 Exams
                 <span className='badge'>{student._count?.StudentExam || 0}</span>
               </button>
@@ -121,7 +121,7 @@ export default function StudentsPage(): JSX.Element {
                 <button onClick={() => {
                   setEditStudent(student);
                   setIsOpenModal(true);
-                }} className='btn gap-2 btn-square'>
+                }} className='btn btn-primary gap-2 btn-square'>
                   <FontAwesomeIcon icon={faEdit}/>
                 </button>
               </div>
@@ -319,9 +319,9 @@ export default function StudentsPage(): JSX.Element {
 
                         <div className='flex w-full space-x-4 items-end justify-end'>
                           <button onClick={() => setIsOpenModal(false)} type='reset'
-                                  className='btn btn-outline justify-self-end'>Cancel
+                                  className='btn btn-primary btn-outline justify-self-end'>Cancel
                           </button>
-                          <button type='submit' className='btn justify-self-end'>
+                          <button type='submit' className='btn btn-primary justify-self-end'>
                             {editStudent ? 'Update' : 'Create'}
                           </button>
                         </div>
