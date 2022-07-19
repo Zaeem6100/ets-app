@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0177c9cd-903a-41ed-93dc-92bd6b8fcf87" name="Changes" comment="fixes ui issues">
+    <list default="true" id="0177c9cd-903a-41ed-93dc-92bd6b8fcf87" name="Changes" comment="fixes ui colors">
       <change afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/docker-compose.prod.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/students.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/students.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +66,7 @@
       <updated>1657961660174</updated>
       <workItem from="1657961662995" duration="17697000" />
       <workItem from="1658044559206" duration="5255000" />
-      <workItem from="1658173565729" duration="3163000" />
+      <workItem from="1658173565729" duration="4062000" />
     </task>
     <task id="LOCAL-00001" summary="theme fix">
       <created>1657964344927</created>
@@ -105,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657979697619</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixes ui colors">
+      <created>1658207974887</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1658207974887</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,7 +131,8 @@
     <MESSAGE value="theme fix" />
     <MESSAGE value="teacher add question" />
     <MESSAGE value="fixes ui issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes ui issues" />
+    <MESSAGE value="fixes ui colors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes ui colors" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
