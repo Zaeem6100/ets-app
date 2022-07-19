@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.rdrCalendarWrapper {
+    @apply bg-base-100 !important;
+}
+
+.rdrDay > .rdrDayNumber > span {
+    @apply text-base-content !important;
+}
+
+.rdrDay.rdrDayPassive > .rdrDayNumber > span {
+    @apply text-base-300 !important;
+}
+
+.rdrDay > .rdrDayNumber > span::after {
+    @apply bg-primary !important;
+}
+
+.rdrDay > span {
+    @apply text-primary !important;
+}
+
+.rdrNextPrevButton {
+    @apply bg-primary !important;
+}
+
+.rdrNextPrevButton {
+    @apply text-primary-content !important;
+}
+
+.rdrSelected {
+    @apply bg-primary text-primary-content !important;
+}
+
+button.rdrNextPrevButton.rdrNextButton > i {
+    @apply border-l-primary-content !important;
+}
+
+button.rdrNextPrevButton.rdrPprevButton > i {
+    @apply border-r-primary-content !important;
+}
+
+.rdrYearPicker > select, .rdrMonthPicker > select {
+    background-image: unset !important;
+    @apply select select-bordered text-base-content bg-base-100 !important;
+}

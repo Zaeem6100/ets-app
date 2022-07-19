@@ -290,7 +290,7 @@ export default function StudentsPage(): JSX.Element {
                               <input
                                 type="radio"
                                 name="gender"
-                                className="radio"
+                                className="radio radio-primary"
                                 onChange={(checked) => checked && setGender("male")}
                                 checked={gender === 'male'}
                               />
@@ -300,7 +300,7 @@ export default function StudentsPage(): JSX.Element {
                               <input
                                 type="radio"
                                 name="gender"
-                                className="radio"
+                                className="radio radio-primary"
                                 onChange={(checked) => checked && setGender("female")}
                                 checked={gender === 'female'}
                               />
