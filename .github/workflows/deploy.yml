@@ -20,7 +20,7 @@ jobs:
       - run: npm i && npm run build && rm -rf node_modules
 
       - name: 🚀 Docker-Compose Remote Deployment
-        uses: ameerhmzx/action-deploy-compose@master
+        uses: ameerhmzx/action-deploy-compose@ver2
         with:
           ssh_host: ${{ secrets.SSH_HOST }}
           ssh_user: ${{ secrets.SSH_USER }}
