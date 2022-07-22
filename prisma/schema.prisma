@@ -56,15 +56,21 @@ model Question {
 }
 
 model Exam {
-  id          Int           @id @default(autoincrement())
-  name        String
-  subjectId   Int
-  Subject     Subject       @relation(fields: [subjectId], references: [id])
-  createdAt   DateTime      @default(now())
-  examStart   DateTime
-  examEnd     DateTime
-  StudentExam StudentExam[]
-  Anomaly     Anomaly[]
+  id                Int           @id @default(autoincrement())
+  name              String
+  subjectId         Int
+  Subject           Subject       @relation(fields: [subjectId], references: [id])
+  createdAt         DateTime      @default(now())
+  examStart         DateTime
+  examEnd           DateTime
+  status            String        @default("draft") // draft, generated, published,
+  amountDifficulty1 Int
+  amountDifficulty2 Int
+  amountDifficulty3 Int
+  amountDifficulty4 Int
+  amountDifficulty5 Int
+  StudentExam       StudentExam[]
+  Anomaly           Anomaly[]
 }
 
 model StudentExam {
