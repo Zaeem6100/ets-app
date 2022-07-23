@@ -23,14 +23,6 @@ async function updateExam(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function deleteExam(req: NextApiRequest, res: NextApiResponse) {
-
-  await prisma.exam.update({
-    where: {id: parseInt(req.query.eid as string)},
-    data: {
-      StudentExam: {deleteMany: {}},
-      Anomaly: {deleteMany: {}}
-    }
-  });
   await prisma.exam.delete({where: {id: parseInt(req.query.eid as string)}});
 
   return res.status(200).json({});
