@@ -19,7 +19,7 @@ model User {
 
 model Teacher {
   id             String           @id
-  User           User             @relation(fields: [id], references: [cnic])
+  User           User             @relation(fields: [id], references: [cnic], onDelete: Cascade)
   institute      String
   gender         String
   Question       Question[]
@@ -29,7 +29,7 @@ model Teacher {
 
 model Student {
   id          String        @id
-  User        User          @relation(fields: [id], references: [cnic])
+  User        User          @relation(fields: [id], references: [cnic], onDelete: Cascade)
   dob         DateTime
   institute   String
   gender      String
@@ -48,33 +48,39 @@ model Question {
   answer           Int
   difficulty       Int
   teacherId        String
-  teacher          Teacher            @relation(fields: [teacherId], references: [id])
+  teacher          Teacher            @relation(fields: [teacherId], references: [id], onDelete: Cascade)
   subjectId        Int
-  Subject          Subject            @relation(fields: [subjectId], references: [id])
+  Subject          Subject            @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   createdAt        DateTime           @default(now())
   ComputedQuestion ComputedQuestion[]
 }
 
 model Exam {
-  id          Int           @id @default(autoincrement())
-  name        String
-  subjectId   Int
-  Subject     Subject       @relation(fields: [subjectId], references: [id])
-  createdAt   DateTime      @default(now())
-  examStart   DateTime
-  examEnd     DateTime
-  StudentExam StudentExam[]
-  Anomaly     Anomaly[]
+  id                Int           @id @default(autoincrement())
+  name              String
+  subjectId         Int
+  Subject           Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  createdAt         DateTime      @default(now())
+  examStart         DateTime
+  examEnd           DateTime
+  status            String        @default("draft") // draft, generated, published,
+  amountDifficulty1 Int
+  amountDifficulty2 Int
+  amountDifficulty3 Int
+  amountDifficulty4 Int
+  amountDifficulty5 Int
+  StudentExam       StudentExam[]
 }
 
 model StudentExam {
   id               Int                @id @default(autoincrement())
   studentId        String
-  Student          Student            @relation(fields: [studentId], references: [id])
+  Student          Student            @relation(fields: [studentId], references: [id], onDelete: Cascade)
   examId           Int
-  Exam             Exam               @relation(fields: [examId], references: [id])
+  Exam             Exam               @relation(fields: [examId], references: [id], onDelete: Cascade)
   createdAt        DateTime           @default(now())
   ComputedQuestion ComputedQuestion[]
+  Anomaly          Anomaly[]
 
   @@unique([examId, studentId], name: "studentExamUK")
 }
@@ -82,9 +88,9 @@ model StudentExam {
 model ComputedQuestion {
   id            Int         @id @default(autoincrement())
   studentExamId Int
-  StudentExam   StudentExam @relation(fields: [studentExamId], references: [id])
+  StudentExam   StudentExam @relation(fields: [studentExamId], references: [id], onDelete: Cascade)
   questionId    Int
-  Question      Question    @relation(fields: [questionId], references: [id])
+  Question      Question    @relation(fields: [questionId], references: [id], onDelete: Cascade)
   markedAnswer  Int?
   createdAt     DateTime    @default(now())
 
@@ -92,12 +98,12 @@ model ComputedQuestion {
 }
 
 model Anomaly {
-  cnic          String   @id
-  Student       Student  @relation(fields: [cnic], references: [id])
+  cnic          String      @id
+  Student       Student     @relation(fields: [cnic], references: [id], onDelete: Cascade)
   studentexamId Int
-  StudentExam   Exam     @relation(fields: [studentexamId], references: [id])
+  StudentExam   StudentExam @relation(fields: [studentexamId], references: [id], onDelete: Cascade)
   imagePath     String
-  createdAt     DateTime @default(now())
+  createdAt     DateTime    @default(now())
 }
 
 model Subject {
@@ -112,9 +118,9 @@ model Subject {
 model TeacherSubject {
   id        Int      @id @default(autoincrement())
   teacherId String
-  Teacher   Teacher  @relation(fields: [teacherId], references: [id])
+  Teacher   Teacher  @relation(fields: [teacherId], references: [id], onDelete: Cascade)
   subjectId Int
-  Subject   Subject  @relation(fields: [subjectId], references: [id])
+  Subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 
   @@unique([subjectId, teacherId], name: "TeacherSubjectUK")

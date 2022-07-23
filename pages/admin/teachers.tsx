@@ -22,42 +22,90 @@ type Teacher = {
   }
 };
 
-export default function TeachersPage(): JSX.Element {
-  let [subjectTeacherId, setSubjectTeacherId] = useState("");
-  let [isOpenModal, setIsOpenModal] = useState(false);
-  let [editTeacher, setEditTeacher] = useState<Teacher | undefined>(undefined);
+type Subject = {
+  id?: number,
+  name: string,
+};
 
-  let [teachers, setTeachers] = useState<Teacher[]>([]);
+type TeacherSubject = {
+  id?: number,
+  Subject: Subject,
+};
+
+export default function TeachersPage(): JSX.Element {
+  const [subjectTeacherId, setSubjectTeacherId] = useState("");
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [allSubjects, setAllSubjects] = useState<Subject[]>([]);
+  const [editTeacher, setEditTeacher] = useState<Teacher | undefined>(undefined);
+
+  const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const [teacherSubjects, setTeacherSubjects] = useState<TeacherSubject[]>([]);
+
   const {setLoading} = useContext(LoaderContext);
 
-  function refreshTeachers() {
+  function refreshData() {
     setLoading(true);
-    axios.get("/api/teachers").then(res => {
-      if (res.status === 200) {
-        setTeachers(res.data);
+
+    let requests = [
+      axios.get("/api/subjects"),
+      axios.get("/api/teachers")
+    ];
+
+    axios
+      .all(requests)
+      .then(axios.spread((subjectRes, teacherRes) => {
+        if (subjectRes.status === 200 && teacherRes.status === 200) {
+          setTeachers(teacherRes.data);
+          setAllSubjects(subjectRes.data);
+        }
+      }))
+      .catch(e => {
+        console.error(e);
+      })
+      .finally(() => {
         setLoading(false);
-      }
-    }).catch(e => {
-      console.error(e);
-      setLoading(false);
-    });
+      });
   }
 
   useEffect(() => {
-    refreshTeachers();
+    refreshData();
   }, []);
 
   function handleDelete(id: string) {
     setLoading(true);
-    axios.delete(`/api/teachers/${id}`).then(res => {
-      if (res.status === 200) {
-        setTeachers(teachers.filter(s => s.id !== id));
+    axios
+      .delete(`/api/teachers/${id}`)
+      .then(res => {
+        if (res.status === 200) {
+          setTeachers(teachers.filter(s => s.id !== id));
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      })
+      .finally(() => {
         setLoading(false);
-      }
-    }).catch(e => {
-      console.error(e);
-      setLoading(false);
-    });
+      });
+  }
+
+  function openTeacherSubjectModal(teacherId: string) {
+    if (teacherId === "") return;
+    setLoading(true);
+
+    axios
+      .get(`/api/teachers/${teacherId}/subjects`)
+      .then(res => {
+        if (res.status === 200) {
+          setTeacherSubjects(res.data);
+          setSubjectTeacherId(teacherId);
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   return (
@@ -72,7 +120,7 @@ export default function TeachersPage(): JSX.Element {
               <h2 className='text-3xl font-bold'>Teachers</h2>
               <span className="indicator-item badge">{teachers.length}</span>
             </div>
-            <div className='tooltip tooltip-left' data-tip="Add new subject">
+            <div className='tooltip tooltip-left' data-tip="Add new teacher">
               <button onClick={() => {
                 setEditTeacher(undefined);
                 setIsOpenModal(true);
@@ -110,7 +158,7 @@ export default function TeachersPage(): JSX.Element {
             <td>{teacher.institute}</td>
             <td className='capitalize'>{teacher.gender}</td>
             <td className='text-right'>
-              <button onClick={() => setSubjectTeacherId(teacher.id)}
+              <button onClick={() => openTeacherSubjectModal(teacher.id)}
                       className='btn gap-2 btn-primary btn-outline flex flex-nowrap'>
                 Subjects
                 <span className='badge'>{teacher._count?.TeacherSubject || 0}</span>
@@ -145,61 +193,24 @@ export default function TeachersPage(): JSX.Element {
   }
 
   function TeacherSubjectModal() {
-    type Subject = {
-      id?: number,
-      name: string,
-    };
-
-    type TeacherSubject = {
-      id?: number,
-      Subject: Subject,
-    };
-
-    const [subjects, setSubjects] = useState<TeacherSubject[]>([]);
-    const [allSubjects, setAllSubjects] = useState<Subject[]>([]);
-    const [selectSubject, setSelectSubjectId] = useState<number | undefined>(undefined);
-
-    useEffect(() => {
-      if (subjectTeacherId !== "") {
-        setLoading(true);
-
-        let requests = [
-          axios.get(`/api/teachers/${subjectTeacherId}/subjects`),
-          axios.get("/api/subjects"),
-        ];
-
-        axios
-          .all(requests)
-          .then(axios.spread((teacherSubjectsRes, subjectsRes) => {
-            if (subjectsRes.status === 200 && subjectsRes.status === 200) {
-              setSubjects(teacherSubjectsRes.data);
-              setAllSubjects(subjectsRes.data);
-              setSelectSubjectId(subjectsRes.data[0]?.id);
-              setLoading(false);
-            }
-          }))
-          .catch(e => {
-            console.error(e);
-            setLoading(false);
-          });
-      }
-    }, [subjectTeacherId]);
+    const [selectSubject, setSelectSubjectId] = useState<number | undefined>(allSubjects[0]?.id);
 
     function handleSubmit() {
       setLoading(true);
       axios
-        .put(`/api/teachers/${subjectTeacherId}/subjects`, {subjects: subjects?.map(s => s.Subject.id)})
+        .put(`/api/teachers/${subjectTeacherId}/subjects`, {subjects: teacherSubjects?.map(s => s.Subject.id)})
         .then(res => {
           if (res.status === 200) {
-            refreshTeachers();
-            setLoading(false);
+            refreshData();
           }
         })
         .catch(e => {
           console.error(e);
+        })
+        .finally(() => {
           setLoading(false);
+          setSubjectTeacherId("");
         });
-      setSubjectTeacherId("");
     }
 
     return (
@@ -265,10 +276,10 @@ export default function TeachersPage(): JSX.Element {
                           <button
                             onClick={() => {
                               const sub = allSubjects.find(s => s.id === selectSubject);
-                              let newSubjects = [...subjects].filter(s => s.Subject.id !== selectSubject);
+                              let newSubjects = [...teacherSubjects].filter(s => s.Subject.id !== selectSubject);
                               if (sub) {
                                 newSubjects.push({Subject: sub});
-                                setSubjects(newSubjects);
+                                setTeacherSubjects(newSubjects);
                               }
                             }}
                             className='btn btn-primary justify-self-end'>
@@ -278,7 +289,7 @@ export default function TeachersPage(): JSX.Element {
                       </div>
 
                       <div>
-                        {subjects?.map((subject, index) => (
+                        {teacherSubjects?.map((subject, index) => (
                           <div key={index}>
                             <div className='flex items-center justify-between space-x-2'>
                               <div className='flex flex-col'>
@@ -286,9 +297,9 @@ export default function TeachersPage(): JSX.Element {
                               </div>
                               <div className='flex flex-col'>
                                 <button onClick={() => {
-                                  const newSubjects = [...subjects];
+                                  const newSubjects = [...teacherSubjects];
                                   newSubjects.splice(index, 1);
-                                  setSubjects(newSubjects);
+                                  setTeacherSubjects(newSubjects);
                                 }} className='btn btn-ghost btn-square'>
                                   <FontAwesomeIcon icon={faTrash}/>
                                 </button>
