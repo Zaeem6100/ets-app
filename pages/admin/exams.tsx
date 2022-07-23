@@ -18,7 +18,7 @@ type Subject = {
 }
 
 type Exam = {
-  id: string,
+  id: number,
   name: string,
   subjectId: number,
   Subject: Subject,
@@ -71,7 +71,7 @@ export default function ExamsPage(): JSX.Element {
     loadData();
   }, []);
 
-  function handleDelete(id: string) {
+  function handleDelete(id: number) {
     setLoading(true);
     axios.delete(`/api/exams/${id}`).then(res => {
       if (res.status === 200) {
@@ -113,6 +113,19 @@ export default function ExamsPage(): JSX.Element {
     </>
   )
 
+  function generateExam(id: number) {
+    setLoading(true);
+    axios
+      .get(`/api/exams/${id}/generate`)
+      .then(res => {
+        if (res.status === 200) loadData();
+      })
+      .catch(console.error)
+      .finally(() => {
+        setLoading(false);
+      })
+  }
+
   function ExamsTable() {
     return (
       <table className="table w-full">
@@ -135,7 +148,8 @@ export default function ExamsPage(): JSX.Element {
             <td>{format(new Date(exam.examEnd), 'dd/MM/yyyy hh:mm')}</td>
             <td>{format(new Date(exam.createdAt), 'dd/MM/yyyy hh:mm')}</td>
             <td className='text-right space-x-2 flex items-center'>
-              {exam.status === 'draft' && <button className='btn btn-success'>Generate</button>}
+              {exam.status === 'draft' &&
+                  <button onClick={() => generateExam(exam.id)} className='btn btn-success'>Generate</button>}
               {exam.status === 'generated' && isPast(new Date(exam.examEnd)) &&
                 (<button className='btn btn-warning'>Publish</button>)
               }
