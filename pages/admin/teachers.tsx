@@ -114,7 +114,7 @@ export default function TeachersPage(): JSX.Element {
         <TeacherModal/>
         <TeacherSubjectModal/>
 
-        <div className='py-16 px-4 container max-w-4xl mx-auto'>
+        <div className='py-16 px-4 container max-w-5xl mx-auto'>
           <div className='flex justify-between'>
             <div className='flex items-center justify-center gap-2'>
               <h2 className='text-3xl font-bold'>Teachers</h2>
