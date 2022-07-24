@@ -253,7 +253,7 @@ export default function ExamsPage(): JSX.Element {
                 <Dialog.Panel>
                   <div className="relative bg-base-100 card ">
                     <div className="card-body">
-                      <h3 className="card-title">{editExam ? "Edit Student" : "Create New Student"}</h3>
+                      <h3 className="card-title">{editExam ? "Edit Student" : "Create New Exam"}</h3>
                       <form onSubmit={handleSubmit} className='py-4 space-y-8'>
 
                         <div className='grid gap-4 grid-cols-1 md:grid-cols-2'>
