@@ -126,6 +126,19 @@ export default function ExamsPage(): JSX.Element {
       })
   }
 
+  function publishExam(id: number) {
+    setLoading(true);
+    axios
+      .get(`/api/exams/${id}/publish`)
+      .then(res => {
+        if (res.status === 200) loadData();
+      })
+      .catch(console.error)
+      .finally(() => {
+        setLoading(false);
+      })
+  }
+
   function ExamsTable() {
     return (
       <table className="table w-full">
@@ -151,7 +164,7 @@ export default function ExamsPage(): JSX.Element {
               {exam.status === 'draft' &&
                   <button onClick={() => generateExam(exam.id)} className='btn btn-success'>Generate</button>}
               {exam.status === 'generated' && isPast(new Date(exam.examEnd)) &&
-                (<button className='btn btn-warning'>Publish</button>)
+                (<button onClick={() => publishExam(exam.id)} className='btn btn-warning'>Publish</button>)
               }
               {exam.status === 'draft' && (
                 <div className="tooltip" data-tip="Edit">
