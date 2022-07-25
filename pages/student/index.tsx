@@ -38,14 +38,22 @@ type StudentExam = {
   }
 }
 
-function getAverageDifficulty(exam: Exam): number {
+function getAverageDifficulty(exam: Exam): string {
   const weightedSum =
     exam.amountDifficulty1 +
     (exam.amountDifficulty2 * 2) +
     (exam.amountDifficulty3 * 3) +
     (exam.amountDifficulty4 * 4) +
     (exam.amountDifficulty5 * 5);
-  return weightedSum / 5;
+
+  const sum =
+    exam.amountDifficulty1 +
+    exam.amountDifficulty2 +
+    exam.amountDifficulty3 +
+    exam.amountDifficulty4 +
+    exam.amountDifficulty5;
+
+  return (weightedSum / sum).toFixed(2);
 }
 
 const Dashboard: NextPage = () => {
@@ -114,10 +122,10 @@ const Dashboard: NextPage = () => {
       if (exam.Exam.status === 'published') {
         return (
           <>
-            {exam.score !== undefined ? `${exam.score} / ${exam._count?.ComputedQuestion}` : 'Absent'}
+            {exam.score !== null ? `${exam.score} / ${exam._count?.ComputedQuestion}` : 'Absent'}
           </>
         );
-      } else if (isPast(new Date(exam.Exam.examEnd))) {
+      } else if (exam.score !== null || isPast(new Date(exam.Exam.examEnd))) {
         return (
           <>
             Result Awaited
@@ -132,7 +140,7 @@ const Dashboard: NextPage = () => {
       } else {
         return (
           <>
-            <Link href={`/student/exam/${exam.id}`}>
+            <Link href={`/student/exam/${exam.Exam.id}`}>
               <div className='btn btn-primary'>Start</div>
             </Link>
           </>

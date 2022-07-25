@@ -72,7 +72,7 @@ export default function StudentsPage(): JSX.Element {
               <h2 className='text-3xl font-bold'>Students</h2>
               <span className="indicator-item badge">{students.length}</span>
             </div>
-            <div className='tooltip tooltip-left' data-tip="Add new subject">
+            <div className='tooltip tooltip-left' data-tip="Add new student">
               <button onClick={() => {
                 setEditStudent(undefined);
                 setIsOpenModal(true);
