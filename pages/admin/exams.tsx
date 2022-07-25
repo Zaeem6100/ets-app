@@ -305,6 +305,7 @@ export default function ExamsPage(): JSX.Element {
                             }}
                                    value={format(examStart, "yyyy-MM-dd'T'HH:mm")}
                                    type="datetime-local"
+                                   min={format(new Date(), "yyyy-MM-dd'T'HH:mm")}
                                    placeholder="5"
                                    required={true}
                                    className="input input-bordered"/>
@@ -315,6 +316,7 @@ export default function ExamsPage(): JSX.Element {
                             <input onChange={(e) => setExamEnd(new Date(e.target.value))}
                                    value={format(examEnd, "yyyy-MM-dd'T'HH:mm")}
                                    type="datetime-local"
+                                   min={format(examStart, "yyyy-MM-dd'T'HH:mm")}
                                    placeholder="5"
                                    required={true}
                                    className="input input-bordered"/>
