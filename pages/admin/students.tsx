@@ -66,13 +66,13 @@ export default function StudentsPage(): JSX.Element {
       <AdminLayout>
         <StudentModal/>
 
-        <div className='py-16 px-4 container max-w-4xl mx-auto'>
+        <div className='py-16 px-4 container max-w-5xl mx-auto'>
           <div className='flex justify-between'>
             <div className='flex items-center justify-center gap-2'>
               <h2 className='text-3xl font-bold'>Students</h2>
               <span className="indicator-item badge">{students.length}</span>
             </div>
-            <div className='tooltip tooltip-left' data-tip="Add new subject">
+            <div className='tooltip tooltip-left' data-tip="Add new student">
               <button onClick={() => {
                 setEditStudent(undefined);
                 setIsOpenModal(true);

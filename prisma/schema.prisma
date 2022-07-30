@@ -79,6 +79,7 @@ model StudentExam {
   examId           Int
   Exam             Exam               @relation(fields: [examId], references: [id], onDelete: Cascade)
   createdAt        DateTime           @default(now())
+  score            Int?
   ComputedQuestion ComputedQuestion[]
   Anomaly          Anomaly[]
 
