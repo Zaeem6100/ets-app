@@ -26,7 +26,6 @@ export const setToken = (token = '') => {
 };
 
 type Payload = {
-  user_id: number,
   role: string,
   name: string,
   cnic: string

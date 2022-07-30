@@ -3,7 +3,6 @@ import {prisma} from "../../../lib/db";
 import bcrypt from "bcrypt";
 
 async function updateStudent(req: NextApiRequest, res: NextApiResponse) {
-
   let newUser: { name: string, password?: string } = {
     name: req.body.name,
   };

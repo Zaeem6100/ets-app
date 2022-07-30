@@ -1,5 +1,7 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {prisma} from "../../../lib/db";
+import {verifyAuth} from "../../../lib/authServer";
+import {JWTPayload} from "jose";
 
 async function createExam(req: NextApiRequest, res: NextApiResponse) {
   const exam = await prisma.exam.create({
@@ -21,11 +23,36 @@ async function createExam(req: NextApiRequest, res: NextApiResponse) {
   return res.status(200).json(exam);
 }
 
+async function getExams(req: NextApiRequest, res: NextApiResponse) {
+  const tokenPayload = await verifyAuth(req, res) as JWTPayload;
+  if ('role' in tokenPayload) {
+    switch (tokenPayload['role']) {
+      case 'admin':
+        const exams = await prisma.exam.findMany({include: {Subject: true}});
+        return res.status(200).json(exams);
+      case 'student':
+        const studentExams = await prisma.studentExam.findMany({
+          where: {studentId: tokenPayload['cnic'] as string},
+          include: {
+            Exam: {
+              include: {Subject: true}
+            },
+            _count: {
+              select: {ComputedQuestion: true}
+            }
+          }
+        });
+        return res.status(200).json(studentExams);
+      default:
+        return res.status(401).json({});
+    }
+  }
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
-      const exams = await prisma.exam.findMany({include: {Subject: true}});
-      return res.status(200).json(exams);
+      return getExams(req, res);
     case 'POST':
       return createExam(req, res);
   }
