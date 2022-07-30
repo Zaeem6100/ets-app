@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0177c9cd-903a-41ed-93dc-92bd6b8fcf87" name="Changes" comment="fixes ui colors">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.prod.yml" afterDir="false" />
+    <list default="true" id="0177c9cd-903a-41ed-93dc-92bd6b8fcf87" name="Changes" comment="student question submission">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/verification/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/verification/data/.gitkeep" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/verification/DatabaseHelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/verification/db_helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/verification/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/verification/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/verification/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/verification/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -66,7 +82,10 @@
       <updated>1657961660174</updated>
       <workItem from="1657961662995" duration="17697000" />
       <workItem from="1658044559206" duration="5255000" />
-      <workItem from="1658173565729" duration="4062000" />
+      <workItem from="1658173565729" duration="22130000" />
+      <workItem from="1658476780041" duration="31452000" />
+      <workItem from="1658641679303" duration="28442000" />
+      <workItem from="1659184872013" duration="3386000" />
     </task>
     <task id="LOCAL-00001" summary="theme fix">
       <created>1657964344927</created>
@@ -110,7 +129,91 @@
       <option name="project" value="LOCAL" />
       <updated>1658207974887</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="ci / cd">
+      <created>1658209071210</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1658209071210</updated>
+    </task>
+    <task id="LOCAL-00008" summary="using deploy ver2">
+      <created>1658211373843</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1658211373843</updated>
+    </task>
+    <task id="LOCAL-00009" summary="theme hook">
+      <created>1658213731627</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1658213731627</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Exam CRUD">
+      <created>1658506858368</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1658506858368</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Exam Generation">
+      <created>1658563797945</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1658563797945</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixes multi request issues">
+      <created>1658566911130</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1658566911130</updated>
+    </task>
+    <task id="LOCAL-00013" summary="cascade deletes">
+      <created>1658567779323</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1658567779323</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix table widths">
+      <created>1658642121618</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1658642121618</updated>
+    </task>
+    <task id="LOCAL-00015" summary="student home">
+      <created>1658649840520</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1658649840520</updated>
+    </task>
+    <task id="LOCAL-00016" summary="student home">
+      <created>1658649848842</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1658649848842</updated>
+    </task>
+    <task id="LOCAL-00017" summary="date picker constraints">
+      <created>1658750258169</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1658750258169</updated>
+    </task>
+    <task id="LOCAL-00018" summary="student question submission">
+      <created>1658757000568</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1658757000568</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,7 +235,18 @@
     <MESSAGE value="teacher add question" />
     <MESSAGE value="fixes ui issues" />
     <MESSAGE value="fixes ui colors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes ui colors" />
+    <MESSAGE value="ci / cd" />
+    <MESSAGE value="using deploy ver2" />
+    <MESSAGE value="theme hook" />
+    <MESSAGE value="Exam CRUD" />
+    <MESSAGE value="Exam Generation" />
+    <MESSAGE value="fixes multi request issues" />
+    <MESSAGE value="cascade deletes" />
+    <MESSAGE value="fix table widths" />
+    <MESSAGE value="student home" />
+    <MESSAGE value="date picker constraints" />
+    <MESSAGE value="student question submission" />
+    <option name="LAST_COMMIT_MESSAGE" value="student question submission" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

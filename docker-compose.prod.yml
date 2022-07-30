@@ -2,18 +2,22 @@ version: '3.5'
 
 services:
   webapp:
-    image: ets
+    image: zaeem6100/ets:latest
     environment:
       - DATABASE_URL=postgresql://postgres:${DB_PASSWORD}@db:5432/quiz?schema=public
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - verifier_host=verifier:3001
     build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
+    volumes:
+      - verification_data:/app/data
     networks:
       - ets_backend
     depends_on:
       - db
+      - verifier
     ports:
       - "3000:3000"
 
@@ -28,8 +32,19 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  verifier:
+    image: zaeem6100/verifier:latest
+    build:
+      context: ./verification
+    networks:
+      - ets_backend
+    restart: unless-stopped
+    volumes:
+      - verification_data:/app/data
+
 volumes:
   postgres_data:
+  verification_data:
 
 networks:
   ets_backend:
