@@ -2,7 +2,6 @@ version: '3.5'
 
 services:
   webapp:
-    image: zaeem6100/ets:latest
     environment:
       - DATABASE_URL=postgresql://postgres:${DB_PASSWORD}@db:5432/quiz?schema=public
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
@@ -33,7 +32,6 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   verifier:
-    image: zaeem6100/verifier:latest
     build:
       context: ./verification
     networks:
