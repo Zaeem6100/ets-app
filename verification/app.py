@@ -1,62 +1,60 @@
-from flask import Flask, jsonify, request
-import db_helper as db
+import logging
 
-from retinaface import RetinaFace
-from deepface import DeepFace
+from flask import Flask, jsonify, request
+
+from db import DB
+from face import Face
 
 app = Flask(__name__)
 
-
-def face_embeddings(img):
-    return RetinaFace.extract_faces(img, align=True)
-
-
-def verify_face(img1, img2):
-    embeddings1 = face_embeddings(img1)
-    embeddings2 = face_embeddings(img2)
-    if embeddings1 is None or embeddings2 is None:
-        return False
-    else:
-        return DeepFace.verify(img1_path=embeddings1[0], img2_path=embeddings2[0], model_name='Facenet512')
+logger = logging.getLogger('Verifier')
+logger.setLevel("DEBUG")
 
 
 @app.route('/verify', methods=['POST'])
 def verify_image():
-    if request.method == 'POST':
-        if request.files:
-            image = request.files["image"]
-            id = request.json["id"]
-            path = request.json["path"]
-            # todo create a share directory for the images
-            if id and path:
-                image = face_embeddings(image)
-                name, embedding = db.get_data(id)
-                if name is None and embedding is None:
-                    return jsonify({'error': 'User not registered', 'errorCode': 1})
-                else:
-                    return jsonify(verify_face(embedding, image))
+    if request.method != 'POST':
+        return "Not Allowed", 405
+
+    id: str = request.json["id"]
+    image = request.json["image"]
+    if not id or not image:
+        return "Bad Request", 400
+
+    db = DB()
+    embeddings = db.get_embeddings(id)
+
+    if len(embeddings) == 0:
+        return "Face not registered", 400
+
+    verify = Face.verify_embeddings(image, embeddings)
+    return jsonify({verify})
 
 
 @app.route('/register', methods=['POST'])
 def register():
-    if request.method == 'POST':
-        if request.files:
-            image = request.files["image"]
-            id = request.json["id"]
-            if id:
-                embeddings = face_embeddings(image)
-                if len(embeddings) == 0:
-                    return jsonify({'error': 'No faces found', 'errorCode': 2})
-                else:
-                    embedding = embeddings[0]
-                    db.insert_data(id, embedding)
-                    return jsonify({'success': 'User registered'})
+    if request.method != 'POST':
+        return "Not Allowed", 405
+
+    images = request.json["images"]
+    id: str = request.json["id"]
+    if not id or not images:
+        return "Bad Request", 400
+
+    embeddings = Face.extract_embeddings(images)
+
+    if len(embeddings) == 0:
+        return "no faces found", 400
+
+    DB().insert_embeddings(id, embeddings)
+    return jsonify(success=True)
 
 
 @app.errorhandler(404)
-def not_found(error):
-    return jsonify({'error': 'Not found'})
+def not_found():
+    return "Not Found", 404
 
 
 if __name__ == '__main__':
+    DB.ensure_creation()
     app.run(host='0.0.0.0', port=3001)

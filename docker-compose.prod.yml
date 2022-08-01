@@ -39,10 +39,12 @@ services:
     restart: unless-stopped
     volumes:
       - verification_data:/app/data
+      - model_data:/app/model
 
 volumes:
   postgres_data:
   verification_data:
+  model_data:
 
 networks:
   ets_backend:
