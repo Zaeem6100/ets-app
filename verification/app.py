@@ -1,6 +1,8 @@
 import logging
 import os
+import pathlib
 
+import requests
 from celery import Celery
 from flask import Flask, jsonify, request
 
@@ -24,11 +26,12 @@ def verify_image():
         return "Not Allowed", 405
 
     id: str = request.json["id"]
+    seid: int = request.json["seid"]
     image = request.json["image"]
-    if not id or not image:
+    if not id or not image or not seid:
         return "Bad Request", 400
 
-    verify_faces_task.delay(id, image)
+    verify_task.delay(id, seid, image)
     return jsonify(success=True)
 
 
@@ -42,7 +45,7 @@ def register():
     if not id or not images:
         return "Bad Request", 400
 
-    register_faces_task.delay(id, images)
+    register_task.delay(id, images)
     return jsonify(success=True)
 
 
@@ -52,20 +55,35 @@ def not_found():
 
 
 @celery.task(bind=True)
-def verify_faces_task(id, image):
+def verify_task(id, seid, image):
     embeddings = DB().get_embeddings(id)
     if len(embeddings) != 0:
-        verify = Face.verify_embeddings(image, embeddings)
-        # TODO: respond to node server
+        if Face.verify_embeddings(image, embeddings):
+            pathlib.Path(image).unlink(missing_ok=True)
+            logger.info(f"No Anomaly Detected! {image}")
+        else:
+            # noinspection HttpUrlsUsage
+            requests.post(
+                url=f"http://{node_host}:3000/api/students/{id}/anomaly",
+                data={
+                    "seid": seid,
+                    "image": image
+                }
+            )
+            logger.info(f"Anomaly Reported! {image}")
+    else:
+        logger.info(f"No face registered for cnic: {id}")
 
 
 @celery.task(bind=True)
-def register_faces_task(id, images):
+def register_task(id, images):
     embeddings = Face.extract_embeddings(images)
     if len(embeddings) != 0:
         DB().insert_embeddings(id, embeddings)
+        logger.info(f"Face registered for cnic: {id}")
+    else:
+        logger.info(f"No face found for cnic: {id}")
 
 
 if __name__ == '__main__':
-    DB.ensure_creation()
     app.run(host='0.0.0.0', port=3001)
