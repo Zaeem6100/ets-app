@@ -1,6 +1,8 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {prisma} from "../../../lib/db";
 import bcrypt from "bcrypt";
+import uploader from "../../../lib/fileUploadServer";
+import axios from "axios";
 
 type Student = {
   id: string,
@@ -19,6 +21,12 @@ type Student = {
   }
 }
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+
 async function getStudents(req: NextApiRequest, res: NextApiResponse<Student[]>) {
   let students: Student[] = await prisma.student.findMany({
     include: {
@@ -35,26 +43,40 @@ async function getStudents(req: NextApiRequest, res: NextApiResponse<Student[]>)
   return res.status(200).json(students);
 }
 
-async function createStudent(req: NextApiRequest, res: NextApiResponse<Student>) {
+async function createStudent(req: NextApiRequest, res: NextApiResponse) {
+  const fields = await uploader(req);
+  if (!fields) return res.status(403).json({});
+
   let student: Student = await prisma.student.create(
     {
       data: {
         User: {
           create: {
-            cnic: req.body.cnic,
-            name: req.body.name,
-            password: bcrypt.hashSync(req.body.password, 8),
+            cnic: fields.get('cnic') as string,
+            name: fields.get('name') as string,
+            password: bcrypt.hashSync(fields.get('password') as string, 8),
             role: "student",
           }
         },
-        institute: req.body.institute,
-        gender: req.body.gender,
-        dob: new Date(req.body.dob),
+        institute: fields.get('institute') as string,
+        gender: fields.get('gender') as string,
+        dob: new Date(fields.get('dob') as string),
       },
       include: {User: true}
     }
   );
   delete student?.User?.password
+
+  try {
+    // noinspection HttpUrlsUsage
+    await axios.post(
+      `http://${process.env.VERIFIER_HOST || "localhost"}:3001/register`,
+      {id: student?.id, images: fields.get('images')},
+    );
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({});
+  }
 
   return res.status(200).json(student);
 }
