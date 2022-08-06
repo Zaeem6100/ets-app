@@ -7,7 +7,7 @@ services:
       - DATABASE_URL=postgresql://postgres:${DB_PASSWORD}@db:5432/quiz?schema=public
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
       - VERIFIER_HOST=verifier
-      - DATA_PATH='/app/data/'
+      - DATA_PATH=/app/data/
     build:
       context: .
       dockerfile: Dockerfile
@@ -48,6 +48,8 @@ services:
     volumes:
       - verification_data:/app/data
       - model_data:/app/model
+    ports:
+      - "3001:3001"
 
   worker:
     image: verifier:latest

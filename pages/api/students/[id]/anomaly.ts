@@ -3,7 +3,7 @@ import {prisma} from "../../../../lib/db";
 
 async function registerAnomaly(req: NextApiRequest, res: NextApiResponse) {
   const studentexamId = parseInt(req.body.seid as string);
-  const imagePath = req.query.image as string;
+  const imagePath = req.body.image as string;
 
   await prisma.student.update({
     where: {id: req.query.id as string},

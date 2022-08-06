@@ -55,7 +55,7 @@ def not_found():
 
 
 @celery.task(bind=True)
-def verify_task(id, seid, image):
+def verify_task(self, id, seid, image):
     embeddings = DB().get_embeddings(id)
     if len(embeddings) != 0:
         if Face.verify_embeddings(image, embeddings):
@@ -76,7 +76,7 @@ def verify_task(id, seid, image):
 
 
 @celery.task(bind=True)
-def register_task(id, images):
+def register_task(self, id, images):
     embeddings = Face.extract_embeddings(images)
     if len(embeddings) != 0:
         DB().insert_embeddings(id, embeddings)

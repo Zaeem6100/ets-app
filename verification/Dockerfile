@@ -8,7 +8,7 @@ COPY requirements.txt .
 RUN python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-ENV DEEPFACE_HOME = '/app/model'
+ENV DEEPFACE_HOME /app/model
 
 COPY . .
 EXPOSE 3001

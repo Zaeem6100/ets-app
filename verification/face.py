@@ -46,8 +46,8 @@ class Face:
     def verify_embeddings(image, embeddings):
         source = Face.get_embedding(image)
 
-        flag = True
+        flag = False
         for embedding in embeddings:
-            flag = flag and Face.verify(source, embedding)
+            flag = flag or Face.verify(source, embedding)
 
         return flag
