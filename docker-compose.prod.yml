@@ -48,8 +48,6 @@ services:
     volumes:
       - verification_data:/app/data
       - model_data:/app/model
-    ports:
-      - "3001:3001"
 
   worker:
     image: verifier:latest
