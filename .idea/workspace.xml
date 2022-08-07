@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0177c9cd-903a-41ed-93dc-92bd6b8fcf87" name="Changes" comment="student question submission">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/verification/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/verification/data/.gitkeep" afterDir="false" />
+    <list default="true" id="0177c9cd-903a-41ed-93dc-92bd6b8fcf87" name="Changes" comment="exam with camera">
+      <change afterPath="$PROJECT_DIR$/pages/api/anomaly/[id]/fail.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/anomaly/[id]/resolve.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/anomaly/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/images/[name].ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/verification/DatabaseHelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/verification/db_helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/verification/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/verification/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/verification/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/verification/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/anomalies.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/anomalies.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +20,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -35,6 +37,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2C1EOUX7lXfJJRO2OxvMYR26SZY" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -58,6 +63,11 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pages/api" />
+      <recent name="$PROJECT_DIR$/pages/images" />
+      <recent name="$PROJECT_DIR$/pages/api/students/[id]" />
     </key>
   </component>
   <component name="RunManager">
@@ -85,7 +95,13 @@
       <workItem from="1658173565729" duration="22130000" />
       <workItem from="1658476780041" duration="31452000" />
       <workItem from="1658641679303" duration="28442000" />
-      <workItem from="1659184872013" duration="3386000" />
+      <workItem from="1659184872013" duration="5034000" />
+      <workItem from="1659267587394" duration="7415000" />
+      <workItem from="1659438443529" duration="932000" />
+      <workItem from="1659598941399" duration="11759000" />
+      <workItem from="1659767881236" duration="8349000" />
+      <workItem from="1659780381174" duration="10150000" />
+      <workItem from="1659858690609" duration="5202000" />
     </task>
     <task id="LOCAL-00001" summary="theme fix">
       <created>1657964344927</created>
@@ -213,7 +229,70 @@
       <option name="project" value="LOCAL" />
       <updated>1658757000568</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="dockerize verifier">
+      <created>1659189165537</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1659189165537</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fix docker issues">
+      <created>1659268749472</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1659268749472</updated>
+    </task>
+    <task id="LOCAL-00021" summary="adds celery worker">
+      <created>1659338535493</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1659338535493</updated>
+    </task>
+    <task id="LOCAL-00022" summary="register anomaly">
+      <created>1659340078872</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1659340078872</updated>
+    </task>
+    <task id="LOCAL-00023" summary="upload images">
+      <created>1659614281169</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1659614281169</updated>
+    </task>
+    <task id="LOCAL-00024" summary="registration image upload">
+      <created>1659770826359</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1659770826359</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fixes minor issues">
+      <created>1659785044799</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1659785044799</updated>
+    </task>
+    <task id="LOCAL-00026" summary="fixes minor issues">
+      <created>1659785059100</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1659785059100</updated>
+    </task>
+    <task id="LOCAL-00027" summary="exam with camera">
+      <created>1659790513452</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1659790513452</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +325,15 @@
     <MESSAGE value="student home" />
     <MESSAGE value="date picker constraints" />
     <MESSAGE value="student question submission" />
-    <option name="LAST_COMMIT_MESSAGE" value="student question submission" />
+    <MESSAGE value="dockerize verifier" />
+    <MESSAGE value="fix docker issues" />
+    <MESSAGE value="adds celery worker" />
+    <MESSAGE value="register anomaly" />
+    <MESSAGE value="upload images" />
+    <MESSAGE value="registration image upload" />
+    <MESSAGE value="fixes minor issues" />
+    <MESSAGE value="exam with camera" />
+    <option name="LAST_COMMIT_MESSAGE" value="exam with camera" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
