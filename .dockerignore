@@ -1,0 +1,5 @@
+verification/
+.github/
+docker-compose*
+README.md
+

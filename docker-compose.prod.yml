@@ -2,18 +2,23 @@ version: '3.5'
 
 services:
   webapp:
-    image: ets
+    image: ets:latest
     environment:
       - DATABASE_URL=postgresql://postgres:${DB_PASSWORD}@db:5432/quiz?schema=public
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - VERIFIER_HOST=verifier
+      - DATA_PATH=/app/data/
     build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
+    volumes:
+      - verification_data:/app/data
     networks:
       - ets_backend
     depends_on:
       - db
+      - verifier
     ports:
       - "3000:3000"
 
@@ -28,8 +33,50 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  verifier:
+    image: verifier:latest
+    build:
+      context: ./verification
+    networks:
+      - ets_backend
+    restart: unless-stopped
+    environment:
+      REDIS_HOST: queue
+      NODE_HOST: webapp
+    depends_on:
+      - queue
+    volumes:
+      - verification_data:/app/data
+      - model_data:/app/model
+
+  worker:
+    image: verifier:latest
+    build:
+      context: ./verification
+    command: celery --app=app.celery worker -n %h
+    environment:
+      REDIS_HOST: queue
+      NODE_HOST: webapp
+    networks:
+      - ets_backend
+    restart: unless-stopped
+    depends_on:
+      - queue
+      - verifier
+    volumes:
+      - verification_data:/app/data
+      - model_data:/app/model
+
+  queue:
+    image: redis:latest
+    restart: unless-stopped
+    networks:
+      - ets_backend
+
 volumes:
   postgres_data:
+  verification_data:
+  model_data:
 
 networks:
   ets_backend:

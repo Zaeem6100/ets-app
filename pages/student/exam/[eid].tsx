@@ -7,6 +7,8 @@ import LoaderContext from "../../../context/LoaderContext";
 import axios from "axios";
 import DashboardLayout from "../../../components/DashboardLayout";
 import {intervalToDuration} from "date-fns";
+import Detector from "../../../components/Detector";
+import FormData from "form-data";
 
 let options = [
   "Option A",
@@ -95,6 +97,7 @@ export default function StudentExamPage() {
 
   const [studentExam, setStudentExam] = useState<StudentExam | undefined>(undefined);
   const [answers, setAnswers] = useState<Map<number, number>>(new Map<number, number>());
+  const [cameraError, setCameraError] = useState(undefined);
 
   const {setLoading} = useContext(LoaderContext);
 
@@ -136,15 +139,47 @@ export default function StudentExamPage() {
       });
   }
 
+  function onCapture(image: Blob | null) {
+    if (image && studentExam) {
+      const data = new FormData();
+      data.append('image', image, `${+new Date()}.png`);
+      data.append('studentexamId', studentExam.id);
+
+      axios.post(
+        `/api/exams/${studentExam.Exam.id}/verify`,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      ).catch(console.error);
+    }
+  }
+
+  function HandleCameraError(e: any) {
+    setCameraError(e);
+    console.error(e);
+  }
+
   return (
     <>
+      {cameraError &&
+          <div className='fixed z-50 inset-0 w-screen h-screen bg-white flex flex-col items-center justify-center'>
+              <p>Can't take exam without camera</p>
+              <p> Fix and refresh this page</p>
+          </div>
+      }
       <DashboardLayout>
+        <Detector duration={5000} onCapture={onCapture} onError={HandleCameraError}/>
         <div className='mx-auto container'>
           <div className='fixed top-0 left-0 right-0 bg-base-100 w-screen z-10 border-b border-base-300'>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 pt-24 pb-4 px-8 max-w-4xl mx-auto'>
-              {studentExam?.Exam?.examEnd &&
-                  <CountDownTimer endTime={studentExam.Exam.examEnd}/>
-              }
+              <div>
+                {studentExam?.Exam?.examEnd &&
+                    <CountDownTimer endTime={studentExam.Exam.examEnd}/>
+                }
+              </div>
               <button onClick={handleSubmit} className='btn btn-primary gap-2'>
                 Submit
                 <FontAwesomeIcon icon={faPaperPlane}/>
@@ -152,7 +187,7 @@ export default function StudentExamPage() {
             </div>
           </div>
           <div className='space-y-16 sm:pt-40 pt-52 pb-16 px-4'>
-            {studentExam && studentExam.ComputedQuestion.map(renderQuestion)}
+            {!cameraError && studentExam && studentExam.ComputedQuestion.map(renderQuestion)}
           </div>
         </div>
       </DashboardLayout>

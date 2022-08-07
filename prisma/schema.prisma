@@ -99,7 +99,8 @@ model ComputedQuestion {
 }
 
 model Anomaly {
-  cnic          String      @id
+  id            Int         @id @default(autoincrement())
+  cnic          String
   Student       Student     @relation(fields: [cnic], references: [id], onDelete: Cascade)
   studentexamId Int
   StudentExam   StudentExam @relation(fields: [studentexamId], references: [id], onDelete: Cascade)

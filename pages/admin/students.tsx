@@ -2,7 +2,7 @@ import AdminLayout from "../../components/AdminLayout";
 import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAdd, faEdit} from "@fortawesome/free-solid-svg-icons";
-import {FormEvent, Fragment, useContext, useEffect, useState} from "react";
+import {FormEvent, Fragment, useContext, useEffect, useRef, useState} from "react";
 import {Dialog, Transition} from "@headlessui/react";
 import axios from "axios";
 import LoaderContext from "../../context/LoaderContext";
@@ -146,6 +146,8 @@ export default function StudentsPage(): JSX.Element {
     const [institute, setInstitute] = useState(editStudent ? editStudent.institute : "");
     const [gender, setGender] = useState(editStudent ? editStudent.gender : "male");
 
+    const fileInput = useRef<HTMLInputElement>(null);
+
     function handleSubmit(e: FormEvent) {
       setLoading(true);
       if (editStudent) {
@@ -173,9 +175,25 @@ export default function StudentsPage(): JSX.Element {
             setLoading(false);
           });
       } else {
+        let data = new FormData();
+        const files = fileInput?.current?.files;
+        if (!files) return;
+        for (let i = 0; i < files.length; i++)
+          data.append('images', files[i], files[i].name);
+        data.append('name', name);
+        data.append('cnic', cnic.replace(/\D/g, ''));
+        data.append('dob', dob.toString());
+        data.append('password', password);
+        data.append('institute', institute);
+        data.append('gender', gender);
         axios.post(
           "/api/students",
-          {name, dob, cnic: cnic.replace(/\D/g, ''), password, institute, gender}
+          data,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            }
+          }
         )
           .then(r => {
             if (r.status === 200) {
@@ -237,84 +255,97 @@ export default function StudentsPage(): JSX.Element {
                   <div className="relative bg-base-100 card ">
                     <div className="card-body">
                       <h3 className="card-title">{editStudent ? "Edit Student" : "Create New Student"}</h3>
-                      <form onSubmit={handleSubmit} className='py-4 space-y-4'>
+                      <form onSubmit={handleSubmit} className='py-4'>
 
-                        <div className='input-group'>
-                          <span className='w-full'>Name</span>
-                          <input onChange={(e) => setName(e.target.value)}
-                                 value={name}
-                                 type="text"
-                                 placeholder="Ahmad Ali"
-                                 required={true}
-                                 className="input input-bordered"/>
-                        </div>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                          <div className='space-y-4'>
+                            <div className='input-group'>
+                              <span className='w-full'>Name</span>
+                              <input onChange={(e) => setName(e.target.value)}
+                                     value={name}
+                                     type="text"
+                                     placeholder="Ahmad Ali"
+                                     required={true}
+                                     className="input input-bordered"/>
+                            </div>
 
-                        <div className='input-group'>
-                          <span className='w-full'>CNIC</span>
-                          <input onChange={(e) => setCnic(e.target.value)}
-                                 value={formatCnic(cnic)}
-                                 minLength={15}
-                                 maxLength={15}
-                                 pattern={"^[0-9]{5}-[0-9]{7}-[0-9]$"}
-                                 type="text"
-                                 placeholder="35200-2222222-2"
-                                 required={!editStudent}
-                                 disabled={!!editStudent}
-                                 className="input input-bordered"/>
-                        </div>
+                            <div className='input-group'>
+                              <span className='w-full'>CNIC</span>
+                              <input onChange={(e) => setCnic(e.target.value)}
+                                     value={formatCnic(cnic)}
+                                     minLength={15}
+                                     maxLength={15}
+                                     pattern={"^[0-9]{5}-[0-9]{7}-[0-9]$"}
+                                     type="text"
+                                     placeholder="35200-2222222-2"
+                                     required={!editStudent}
+                                     disabled={!!editStudent}
+                                     className="input input-bordered"/>
+                            </div>
 
-                        <div className='input-group'>
-                          <span className='w-full'>Password</span>
-                          <input onChange={(e) => setPassword(e.target.value)}
-                                 value={password}
-                                 minLength={6}
-                                 type="password"
-                                 placeholder={editStudent ? '(unchanged)' : "********"}
-                                 required={!editStudent}
-                                 className="input input-bordered"/>
-                        </div>
+                            <div className='input-group'>
+                              <span className='w-full'>Password</span>
+                              <input onChange={(e) => setPassword(e.target.value)}
+                                     value={password}
+                                     minLength={6}
+                                     type="password"
+                                     placeholder={editStudent ? '(unchanged)' : "********"}
+                                     required={!editStudent}
+                                     className="input input-bordered"/>
+                            </div>
 
-                        <div className='input-group'>
-                          <span className='w-full'>Institute</span>
-                          <input onChange={(e) => setInstitute(e.target.value)}
-                                 value={institute}
-                                 type="text"
-                                 placeholder="University of Management and Technology"
-                                 required={true}
-                                 className="input input-bordered"/>
-                        </div>
+                            <div className='input-group'>
+                              <span className='w-full'>Institute</span>
+                              <input onChange={(e) => setInstitute(e.target.value)}
+                                     value={institute}
+                                     type="text"
+                                     placeholder="University of Management and Technology"
+                                     required={true}
+                                     className="input input-bordered"/>
+                            </div>
 
-                        <div>
-                          <div className="form-control">
-                            <label className="label justify-start gap-2 cursor-pointer">
-                              <input
-                                type="radio"
-                                name="gender"
-                                className="radio radio-primary"
-                                onChange={(checked) => checked && setGender("male")}
-                                checked={gender === 'male'}
-                              />
-                              <span className="label-text">Male</span>
-                            </label>
-                            <label className="label justify-start gap-2 cursor-pointer">
-                              <input
-                                type="radio"
-                                name="gender"
-                                className="radio radio-primary"
-                                onChange={(checked) => checked && setGender("female")}
-                                checked={gender === 'female'}
-                              />
-                              <span className="label-text">Female</span>
-                            </label>
+                            <div>
+                              <div className="form-control">
+                                <label className="label justify-start gap-2 cursor-pointer">
+                                  <input
+                                    type="radio"
+                                    name="gender"
+                                    className="radio radio-primary"
+                                    onChange={(checked) => checked && setGender("male")}
+                                    checked={gender === 'male'}
+                                  />
+                                  <span className="label-text">Male</span>
+                                </label>
+                                <label className="label justify-start gap-2 cursor-pointer">
+                                  <input
+                                    type="radio"
+                                    name="gender"
+                                    className="radio radio-primary"
+                                    onChange={(checked) => checked && setGender("female")}
+                                    checked={gender === 'female'}
+                                  />
+                                  <span className="label-text">Female</span>
+                                </label>
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                          <div className='space-y-8'>
+                            {!editStudent &&
+                                <div className='space-y-4'>
+                                    <div className='text-left'>Images</div>
+                                    <input type="file" accept='image/*' multiple ref={fileInput}
+                                           required={!editStudent}/>
+                                </div>
+                            }
 
-                        <div>
-                          <div className='text-left'>Date of Birth</div>
-                          <Calendar
-                            date={dob}
-                            onChange={(date: Date) => setDob(date)}
-                          />
+                            <div>
+                              <div className='text-left'>Date of Birth</div>
+                              <Calendar
+                                date={dob}
+                                onChange={(date: Date) => setDob(date)}
+                              />
+                            </div>
+                          </div>
                         </div>
 
                         <div className='flex w-full space-x-4 items-end justify-end'>
