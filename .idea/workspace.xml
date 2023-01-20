@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0177c9cd-903a-41ed-93dc-92bd6b8fcf87" name="Changes" comment="exam with camera">
-      <change afterPath="$PROJECT_DIR$/heroku.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +27,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectId" id="2C1EOUX7lXfJJRO2OxvMYR26SZY" />
   <component name="ProjectLevelVcsManager">
@@ -98,6 +99,7 @@
       <workItem from="1659858690609" duration="5202000" />
       <workItem from="1674232377233" duration="196000" />
       <workItem from="1674232617905" duration="1727000" />
+      <workItem from="1674237925875" duration="585000" />
     </task>
     <task id="LOCAL-00001" summary="theme fix">
       <created>1657964344927</created>
