@@ -4,7 +4,7 @@ services:
   webapp:
     image: ets:latest
     environment:
-      - DATABASE_URL=postgresql://postgres:${DB_PASSWORD}@db:5432/quiz?schema=public
+#      - DATABASE_URL=postgresql://postgres:${DB_PASSWORD}@db:5432/quiz?schema=public
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
       - VERIFIER_HOST=verifier
       - DATA_PATH=/app/data/
