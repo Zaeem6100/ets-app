@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0177c9cd-903a-41ed-93dc-92bd6b8fcf87" name="Changes" comment="exam with camera">
-      <change afterPath="$PROJECT_DIR$/pages/api/anomaly/[id]/fail.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/anomaly/[id]/resolve.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/anomaly/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/images/[name].ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/heroku.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/anomalies.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/anomalies.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +43,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/ameerhmzx/nextcloud/projects/zaeem/ets-app&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Projects/ets-app&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -102,6 +96,8 @@
       <workItem from="1659767881236" duration="8349000" />
       <workItem from="1659780381174" duration="10150000" />
       <workItem from="1659858690609" duration="5202000" />
+      <workItem from="1674232377233" duration="196000" />
+      <workItem from="1674232617905" duration="1727000" />
     </task>
     <task id="LOCAL-00001" summary="theme fix">
       <created>1657964344927</created>
